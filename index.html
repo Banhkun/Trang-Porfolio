@@ -8,6 +8,7 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <style>
     :root {
       --neon-pink: #ff3cac;
@@ -122,7 +123,6 @@
     .nav-links a:hover::after {
       width: 100%;
     }
-    /* Hamburger Menu */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -229,7 +229,6 @@
       height: 100%;
       object-fit: cover;
     }
-    /* Animated Scroll Indicator */
     .scroll-indicator {
       position: absolute;
       bottom: 20px;
@@ -259,7 +258,7 @@
       100% { opacity: 0; transform: translateY(20px); }
     }
 
-    /* Gallery Section */
+    /* Modern 3D Card Slider */
     .gallery {
       padding: 4rem 2rem;
       max-width: 1400px;
@@ -267,68 +266,156 @@
     }
     .gallery h2 {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .icon-cards {
+
+    .card-slider {
       position: relative;
-      width: 60vw;
-      height: 40vw;
-      max-width: 380px;
-      max-height: 250px;
-      margin: 0 auto;
-      color: white;
-      perspective: 1000px;
-      transform-origin: center;
-    }
-    .icon-cards__content {
-      position: absolute;
       width: 100%;
-      height: 100%;
-      transform-origin: center;
-      transform-style: preserve-3d;
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+      overflow: visible;
     }
-    .icon-cards__item {
+
+    .cards-container {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    .card {
+      position: absolute;
+      width: 300px;
+      height: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transform-style: preserve-3d;
+      border: 2px solid rgba(255, 60, 172, 0.3);
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(255, 60, 172, 0.2);
+    }
+
+    .card::before {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      width: 60vw;
-      height: 40vw;
-      max-width: 380px;
-      max-height: 250px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.1);
-      border-radius: 6px;
-      transform-origin: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: linear-gradient(135deg, rgba(255, 60, 172, 0.1), rgba(0, 243, 255, 0.1));
       opacity: 0;
       transition: opacity 0.3s ease;
+      z-index: 1;
     }
-    .icon-cards__item img {
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
     }
-    .icon-cards__item p {
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-info {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 0.5rem;
-      text-align: center;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
       color: white;
-      opacity: 0;
-      transition: opacity var(--transition-speed);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 2;
     }
-    .icon-cards__item:hover p {
-      opacity: 1;
+
+    .card:hover .card-info {
+      transform: translateY(0);
     }
-    .icon-cards__item.visible {
-      opacity: 1;
+
+    .card-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--cyber-teal);
+    }
+
+    .card-info p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Navigation buttons */
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .nav-btn {
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 60, 172, 0.5);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Indicators */
+    .slider-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .indicator.active {
+      background: var(--cyber-teal);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
     }
 
     /* Lightbox */
@@ -351,7 +438,7 @@
       opacity: 1;
       background-color: rgba(0, 0, 0, 0.9);
     }
-    .lightbox-image {
+    .lightbox-image, .lightbox-video {
       margin: auto;
       display: block;
       width: 80%;
@@ -359,7 +446,7 @@
       transform: scale(0.9);
       transition: transform 0.3s ease;
     }
-    .lightbox.show .lightbox-image {
+    .lightbox.show .lightbox-image, .lightbox.show .lightbox-video {
       transform: scale(1);
     }
     .lightbox-caption {
@@ -411,7 +498,7 @@
       background-color: rgba(0, 0, 0, 0.8);
     }
 
-    /* Video Section */
+    /* Video Carousel Section */
     .video-section {
       padding: 4rem 2rem;
       max-width: 1400px;
@@ -422,34 +509,81 @@
       margin-bottom: 2rem;
       font-family: 'Playfair Display', serif;
     }
-    .video-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+    .video-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1.5rem;
+      padding: 1rem;
+      scrollbar-width: none;
     }
-    .video-item {
+    .video-carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .video-carousel__item {
+      flex: 0 0 auto;
+      width: 280px;
+      height: 500px;
       position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
       border-radius: 15px;
-      transition: transform 0.5s, box-shadow 0.5s;
+      overflow: hidden;
+      scroll-snap-align: start;
       cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
     }
-    .video-item:hover {
-      transform: translateY(-10px);
+    .video-carousel__item:hover {
+      transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(255, 60, 172, 0.3);
     }
-    .video-item iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .video-carousel__item img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
-    .video-item p {
+    .video-carousel__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      transition: opacity var(--transition-speed);
+    }
+    .video-carousel__item:hover .video-carousel__play {
+      opacity: 1;
+    }
+    .video-carousel__play::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 20px solid var(--cyber-teal);
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+    .video-carousel__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
       text-align: center;
-      margin-top: 0.5rem;
+      color: white;
+      font-size: 1rem;
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity var(--transition-speed);
+    }
+    .video-carousel__item:hover .video-carousel__caption {
+      opacity: 1;
     }
 
     /* Testimonials Section */
@@ -473,7 +607,7 @@
       position: relative;
     }
     .testimonial::before {
-      content: '“';
+      content: '"';
       font-size: 3rem;
       color: var(--neon-pink);
       position: absolute;
@@ -574,7 +708,7 @@
     .back-to-top {
       position: fixed;
       bottom: 30px;
-      right: 30px;
+      left: 30px;
       background: var(--cyber-teal);
       padding: 0.8rem;
       border-radius: 50%;
@@ -586,70 +720,6 @@
     }
     .back-to-top:hover {
       transform: scale(1.1);
-    }
-
-    /* Checkbox */
-    .checkbox {
-      position: relative;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #F47956;
-      transition: color 0.3s ease;
-      user-select: none;
-    }
-    .checkbox:hover {
-      color: #F7A95A;
-    }
-    .checkbox__checkbox {
-      position: relative;
-      top: 0;
-      width: 1.0625rem;
-      height: 1.0625rem;
-      background: white;
-      border: 1px solid currentColor;
-      border-radius: 4px;
-      vertical-align: middle;
-      transition: background 0.1s ease;
-      cursor: pointer;
-    }
-    .checkbox__checkbox::after {
-      content: '';
-      position: absolute;
-      top: 1px;
-      left: 5px;
-      width: 5px;
-      height: 11px;
-      opacity: 0;
-      transform: rotate(45deg) scale(0);
-      border-right: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-      transition: all 0.3s ease;
-      transition-delay: 0.15s;
-    }
-    .checkbox__label {
-      margin-left: 5px;
-      vertical-align: middle;
-      cursor: pointer;
-    }
-    input:checked ~ .checkbox__checkbox {
-      border-color: transparent;
-      background: #F47956;
-      animation: jelly 0.6s ease;
-    }
-    input:checked ~ .checkbox__checkbox:after {
-      opacity: 1;
-      transform: rotate(45deg) scale(1);
-    }
-    @keyframes jelly {
-      from { transform: scale(1, 1); }
-      30% { transform: scale(1.25, 0.75); }
-      40% { transform: scale(0.75, 1.25); }
-      50% { transform: scale(1.15, 0.85); }
-      65% { transform: scale(0.95, 1.05); }
-      75% { transform: scale(1.05, 0.95); }
-      to { transform: scale(1, 1); }
     }
 
     /* Media Queries */
@@ -668,17 +738,31 @@
       .hamburger {
         display: flex;
       }
-      .icon-cards {
-        width: 80vw;
-        height: 50vw;
-        max-width: 300px;
-        max-height: 200px;
+      .video-carousel__item {
+        width: 200px;
+        height: 350px;
       }
-      .icon-cards__item {
-        width: 80vw;
-        height: 50vw;
-        max-width: 300px;
-        max-height: 200px;
+    }
+
+    @media (min-width: 769px) {
+      .slider-nav {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0;
+        padding: 0 20px;
+        pointer-events: none;
+      }
+      .nav-btn {
+        pointer-events: auto;
+      }
+      .slider-indicators {
+        margin-top: 3rem;
       }
     }
 
@@ -689,6 +773,110 @@
     }
     .floating {
       animation: float 4s ease-in-out infinite;
+    }
+
+    /* Floating Social Buttons Styles */
+    #main-div {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1001;
+    }
+
+    #main-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 50px;
+      width: 50px;
+      font-size: 20px;
+      color: #0064f3;
+      cursor: pointer;
+      background-color: #fff;
+      box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+    }
+
+    #main-button ~ a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      height: 50px;
+      width: 50px;
+      font-size: 20px;
+      opacity: 0;
+      text-decoration: none;
+      color: #fff;
+      background-color: #fff;
+      box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      transition: .2s all linear;
+      -webkit-transition: .2s all linear;
+      -moz-transition: .2s all linear;
+      -ms-transition: .2s all linear;
+      -o-transition: .2s all linear;
+    }
+
+    #main-button ~ .telegram-color {
+      background: linear-gradient(0deg, #017AB1, #01ABE6);
+    }
+
+    #main-button ~ .zalo-color {
+      background: linear-gradient(0deg, #0068ff, #0098ff);
+    }
+
+    #main-button ~ .messenger-color {
+      background: linear-gradient(0deg, #0078FF, #00C6FF);
+    }
+
+    #main-button.open ~ a {
+      opacity: 1;
+      transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
+      -webkit-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
+      -moz-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
+      -ms-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
+      -o-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
+    }
+    #main-button.open ~ a:nth-of-type(1) {
+      bottom: 60px;
+    }
+    #main-button.open ~ a:nth-of-type(2) {
+      bottom: 120px;
+    }
+    #main-button.open ~ a:nth-of-type(3) {
+      bottom: 180px;
+    }
+
+    .wave {
+      animation-name: wave;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes wave {
+      0% {box-shadow: 0 0 0px 0px rgba(255, 255, 255, 0.5);}
+      100% {box-shadow: 0 0 0px 10px rgba(255, 255, 255, 0);}
+    }
+
+    .open {
+      animation-iteration-count: 1;
     }
   </style>
 </head>
@@ -737,21 +925,29 @@
       <a href="#contact" class="cta-button">Book Now</a>
     </div>
     <div class="hero-image floating">
-      <img src="resources/hero-image.jpg" alt="Lumina Portrait" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=500&h=600&fit=crop&crop=face" alt="MC Portrait" loading="lazy" />
     </div>
     <div class="scroll-indicator"></div>
   </section>
 
-  <!-- Gallery Section -->
+  <!-- Gallery Section with Modern 3D Card Slider -->
   <section class="gallery" id="gallery">
     <h2>Gallery</h2>
-    <figure class="icon-cards mt-3">
-      <div class="icon-cards__content" id="icon-cards__content"></div>
-    </figure>
-    <div class="checkbox">
-      <input class="d-none" id="toggle-animation" type="checkbox" checked />
-      <label class="checkbox__checkbox" for="toggle-animation"></label>
-      <label class="checkbox__label" for="toggle-animation">Toggle animation</label>
+    <div class="card-slider">
+      <div class="cards-container" id="cards-container">
+        <!-- Cards will be dynamically generated -->
+      </div>
+    </div>
+    <div class="slider-nav">
+      <button class="nav-btn" id="prev-btn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="nav-btn" id="next-btn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="slider-indicators" id="slider-indicators">
+      <!-- Indicators will be dynamically generated -->
     </div>
   </section>
 
@@ -759,43 +955,23 @@
   <div class="lightbox" id="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-image" id="lightbox-image" src="" />
+    <iframe class="lightbox-video" id="lightbox-video" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen></iframe>
     <div class="lightbox-caption" id="lightbox-caption"></div>
     <a class="prev" id="prev">&#10094;</a>
     <a class="next" id="next">&#10095;</a>
   </div>
 
-  <!-- Video Section -->
+  <!-- Video Carousel Section -->
   <section class="video-section" id="video">
     <h2>Performances</h2>
-    <div class="video-gallery">
-      <div class="video-item">
-        <iframe
-          src="https://www.youtube.com/embed/8kmr9_FXTXQ?si=vpLmBl8mtBWmUAt2"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-        <p>Wedding Hosting</p>
-      </div>
-      <div class="video-item">
-        <iframe
-          src="https://www.youtube.com/embed/57hfgGDeaYI?si=85Y0r3rJusl4SWd1"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-        <p>Corporate Event</p>
-      </div>
-    </div>
+    <div class="video-carousel" id="video-carousel"></div>
   </section>
 
   <!-- Testimonials Section -->
   <section class="testimonials" id="testimonials">
     <h2>Testimonials</h2>
     <div class="testimonial">
-      <p>"Lumina made our event unforgettable! Her energy and professionalism are unmatched." - Client Name</p>
+      <p>"MC Thùy Trang made our event unforgettable! Her energy and professionalism are unmatched." - Client Name</p>
     </div>
     <div class="testimonial">
       <p>"Absolutely fantastic MC! She kept the audience engaged throughout the event." - Another Client</p>
@@ -815,17 +991,17 @@
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <h2>Let's Create Magic</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="5" placeholder="Your Vision" required></textarea>
+    <form class="contact-form" action="https://formspree.io/f/yourformid" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea rows="5" name="message" placeholder="Your Vision" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 MC Thùy Trang. All Rights Reserved.</p>
+    <p>&copy; 2025 MC Thùy Trang. All Rights Reserved.
     <p>
       <a href="#">Instagram</a> |
       <a href="#">Facebook</a> |
@@ -836,6 +1012,16 @@
   <!-- Back to Top Button -->
   <div class="back-to-top" id="back-to-top">&#8679;</div>
 
+  <!-- Floating Social Buttons -->
+  <div id="main-div">
+    <div id="main-button" class="wave">
+      <i class="fas fa-comments"></i>
+    </div>
+    <a href="https://t.me/trangnaria" class="telegram-color" title="Telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+    <a href="https://zalo.me/0963711301" class="zalo-color" title="Zalo Chat" target="_blank"><i class="fas fa-comment-dots"></i></a>
+    <a href="https://m.me/mcvothuytrang" class="messenger-color" title="Facebook Messenger" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+  </div>
+
   <!-- JavaScript -->
   <script>
     // Preloader
@@ -845,8 +1031,8 @@
         preloader.style.opacity = '0';
         setTimeout(() => (preloader.style.display = 'none'), 500);
       };
-      setTimeout(hidePreloader, 2000); // Fallback timeout after 2 seconds
-      hidePreloader(); // Attempt to hide immediately after DOM is ready
+      setTimeout(hidePreloader, 2000);
+      hidePreloader();
     });
 
     // Custom Cursor
@@ -868,119 +1054,387 @@
       });
     });
 
-    // Dynamic Carousel
+    // Modern 3D Card Slider
     const images = [
-      { src: 'resources/image1.png', alt: 'Image 1' },
-      { src: 'resources/image2.png', alt: 'Image 2' },
-      { src: 'resources/image3.png', alt: 'Image 3' },
-      { src: 'resources/image4.png', alt: 'Image 4' },
-      // Add more images as needed
-    ].map(image => ({
-      ...image,
-      caption: image.src.split('/').pop().split('.').slice(0, -1).join('.')
-    }));
+      { 
+        src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=1200&fit=crop', 
+        alt: 'Wedding Event', 
+        title: 'Wedding Ceremony',
+        description: 'Elegant wedding hosting with grace and style'
+      },
+      { 
+        src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=1200&fit=crop', 
+        alt: 'Corporate Event', 
+        title: 'Corporate Gala',
+        description: 'Professional corporate event management'
+      },
+      { 
+        src: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&h=1200&fit=crop', 
+        alt: 'Birthday Party', 
+        title: 'Birthday Celebration',
+        description: 'Fun and engaging birthday party hosting'
+      },
+      { 
+        src: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=1200&fit=crop', 
+        alt: 'Music Concert', 
+        title: 'Music Concert',
+        description: 'Dynamic concert hosting and crowd engagement'
+      },
+      { 
+        src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=1200&fit=crop', 
+        alt: 'Award Ceremony', 
+        title: 'Award Ceremony',
+        description: 'Prestigious award ceremony hosting'
+      }
+    ];
 
-    const content = document.getElementById('icon-cards__content');
-    let isStepAnimation = false;
-    let animationFrameId = null;
-    let currentIndex = 0;
+    const cardsContainer = document.getElementById('cards-container');
+    const sliderIndicators = document.getElementById('slider-indicators');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
 
-    function createCarousel() {
-      content.innerHTML = '';
+    let currentIndex = 2; // Start with the middle card active
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+
+    const baseCardWidth = 300;
+    const baseCardHeight = 400;
+    const baseZNear = 150;
+    const baseZFar = 300;
+    const basePerspective = 1200;
+    const baseAngleNear = 25;
+    const baseAngleFar = 50;
+    const spreadFactor = 0.8;
+    let cardWidth, cardHeight, zNear, zFar, perspective, angleNear, angleFar, spread;
+
+    function updateSizes() {
+      if (window.innerWidth <= 768) {
+        cardWidth = 250;
+        cardHeight = 350;
+        perspective = 1000;
+        zNear = -100;
+        zFar = -200;
+        angleNear = 30;
+        angleFar = 60;
+        spread = 0; // No spread on mobile
+      } else {
+        cardWidth = Math.min(500, window.innerWidth * 0.35);
+        cardHeight = cardWidth * (baseCardHeight / baseCardWidth);
+        const factor = cardWidth / baseCardWidth;
+        zNear = - (baseZNear * factor);
+        zFar = - (baseZFar * factor);
+        perspective = basePerspective * factor;
+        angleNear = baseAngleNear;
+        angleFar = baseAngleFar;
+        spread = cardWidth * spreadFactor;
+      }
+      cardsContainer.style.width = `${cardWidth}px`;
+      cardsContainer.style.height = `${cardHeight}px`;
+      cardsContainer.parentElement.style.height = `${cardHeight}px`;
+      cardsContainer.parentElement.style.perspective = `${perspective}px`;
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.width = `${cardWidth}px`;
+        card.style.height = `${cardHeight}px`;
+      });
+    }
+
+    // Create cards
+    function createCards() {
+      cardsContainer.innerHTML = '';
+      sliderIndicators.innerHTML = '';
+      
       images.forEach((image, index) => {
-        const item = document.createElement('div');
-        item.classList.add('icon-cards__item');
-        item.innerHTML = `
+        // Create card
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
           <img src="${image.src}" alt="${image.alt}" loading="lazy" />
-          <p>${image.caption}</p>
+          <div class="card-info">
+            <h3>${image.title}</h3>
+            <p>${image.description}</p>
+          </div>
         `;
-        content.appendChild(item);
+        cardsContainer.appendChild(card);
+
+        // Create indicator
+        const indicator = document.createElement('div');
+        indicator.className = `indicator ${index === currentIndex ? 'active' : ''}`;
+        indicator.addEventListener('click', () => goToSlide(index));
+        sliderIndicators.appendChild(indicator);
       });
-      updateVisibleItems();
+
+      updateSizes();
+      updateCards();
     }
 
-    function updateVisibleItems() {
-      const items = document.querySelectorAll('.icon-cards__item');
-      items.forEach(item => item.classList.remove('visible'));
-      const visibleIndices = [
-        (currentIndex) % images.length,
-        (currentIndex + 1) % images.length,
-        (currentIndex + 2) % images.length
-      ];
-      visibleIndices.forEach((index, pos) => {
-        const item = items[index];
-        const angle = pos * 120 - 120; // -120°, 0°, +120°
-        item.style.transform = `rotateY(${angle}deg) translateZ(35vw)`;
-        item.classList.add('visible');
-      });
-    }
+    // Update card positions
+    function updateCards() {
+      const cards = document.querySelectorAll('.card');
+      const indicators = document.querySelectorAll('.indicator');
+      
+      cards.forEach((card, index) => {
+        card.style.transform = '';
+        card.style.opacity = '';
+        card.style.zIndex = '';
+        
+        const position = index - currentIndex;
+        let transform = '';
+        let opacity = 1;
+        let zIndex = 0;
 
-    function animateCarousel() {
-      let rotation = 0;
-      const speed = isStepAnimation ? 120 / (15 * 60) : 120 / (20 * 60); // 120° per cycle (3 items)
-      function update() {
-        rotation += speed;
-        if (rotation >= 120) {
-          rotation -= 120;
-          currentIndex = (currentIndex + 1) % images.length;
-          updateVisibleItems();
+        if (position === -2) {
+          transform = `translateX(${-spread * 1.5}px) rotateY(${-angleFar}deg) translateZ(${zFar}px)`;
+          opacity = 0.5;
+          zIndex = 1;
+        } else if (position === -1) {
+          transform = `translateX(${-spread * 0.8}px) rotateY(${-angleNear}deg) translateZ(${zNear}px)`;
+          opacity = 0.75;
+          zIndex = 2;
+        } else if (position === 0) {
+          transform = `rotateY(0deg) translateZ(0px)`;
+          opacity = 1;
+          zIndex = 10;
+        } else if (position === 1) {
+          transform = `translateX(${spread * 0.8}px) rotateY(${angleNear}deg) translateZ(${zNear}px)`;
+          opacity = 0.75;
+          zIndex = 2;
+        } else if (position === 2) {
+          transform = `translateX(${spread * 1.5}px) rotateY(${angleFar}deg) translateZ(${zFar}px)`;
+          opacity = 0.5;
+          zIndex = 1;
+        } else {
+          opacity = 0;
+          zIndex = 0;
         }
-        content.style.transform = `translateZ(-30vw) rotateY(${rotation}deg)`;
-        animationFrameId = requestAnimationFrame(update);
-      }
-      animationFrameId = requestAnimationFrame(update);
+
+        card.style.transform = transform;
+        card.style.opacity = opacity;
+        card.style.zIndex = zIndex;
+      });
+
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentIndex);
+      });
     }
 
-    function classToggle() {
-      isStepAnimation = !isStepAnimation;
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-      animateCarousel();
+    // Go to specific slide
+    function goToSlide(index) {
+      currentIndex = index;
+      updateCards();
     }
 
-    createCarousel();
-    animateCarousel();
-    document.querySelector('#toggle-animation').addEventListener('click', classToggle);
+    // Next slide
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateCards();
+    }
 
-    // Gallery Lightbox
+    // Previous slide
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateCards();
+    }
+
+    // Event listeners for navigation
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // Touch/Swipe functionality
+    cardsContainer.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+    });
+
+    cardsContainer.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      currentX = e.touches[0].clientX;
+    });
+
+    cardsContainer.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      const diff = startX - currentX;
+      const threshold = 50;
+      
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    });
+
+    // Mouse drag functionality
+    cardsContainer.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      cardsContainer.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      currentX = e.clientX;
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      cardsContainer.style.cursor = 'grab';
+      
+      const diff = startX - currentX;
+      const threshold = 50;
+      
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    });
+
+    // Card click to open lightbox
+    cardsContainer.addEventListener('click', (e) => {
+      if (!isDragging && Math.abs(startX - currentX) < 10) {
+        const card = e.target.closest('.card');
+        if (card) {
+          const cardIndex = Array.from(cardsContainer.children).indexOf(card);
+          openLightbox(cardIndex, 'image');
+        }
+      }
+    });
+
+    // Auto-rotate (optional)
+    let autoRotateInterval;
+    function startAutoRotate() {
+      autoRotateInterval = setInterval(nextSlide, 4000);
+    }
+    function stopAutoRotate() {
+      clearInterval(autoRotateInterval);
+    }
+
+    // Pause auto-rotate on hover
+    cardsContainer.addEventListener('mouseenter', stopAutoRotate);
+    cardsContainer.addEventListener('mouseleave', startAutoRotate);
+
+    // Initialize carousel
+    createCards();
+    startAutoRotate();
+
+    // Resize listener
+    window.addEventListener('resize', () => {
+      updateSizes();
+      updateCards();
+    });
+
+    // Video Carousel
+    const videos = [
+      {
+        src: 'https://www.youtube.com/embed/8kmr9_FXTXQ?si=vpLmBl8mtBWmUAt2',
+        thumbnail: 'https://img.youtube.com/vi/8kmr9_FXTXQ/maxresdefault.jpg',
+        caption: 'Wedding Hosting'
+      },
+      {
+        src: 'https://www.youtube.com/embed/57hfgGDeaYI?si=85Y0r3rJusl4SWd1',
+        thumbnail: 'https://img.youtube.com/vi/57hfgGDeaYI/maxresdefault.jpg',
+        caption: 'Corporate Event'
+      }
+    ];
+
+    const videoCarousel = document.getElementById('video-carousel');
+    function createVideoCarousel() {
+      videoCarousel.innerHTML = '';
+      videos.forEach((video, index) => {
+        const item = document.createElement('div');
+        item.classList.add('video-carousel__item');
+        item.innerHTML = `
+          <img src="${video.thumbnail}" alt="${video.caption}" loading="lazy" />
+          <div class="video-carousel__play"></div>
+          <p class="video-carousel__caption">${video.caption}</p>
+        `;
+        videoCarousel.appendChild(item);
+      });
+    }
+
+    createVideoCarousel();
+
+    // Lightbox for Images and Videos
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxVideo = document.getElementById('lightbox-video');
     const lightboxCaption = document.getElementById('lightbox-caption');
     const close = document.querySelector('.close');
     const prev = document.getElementById('prev');
     const next = document.getElementById('next');
 
     let currentLightboxIndex = 0;
+    let currentContentType = 'image';
 
-    function openLightbox(index) {
+    function openLightbox(index, type) {
       currentLightboxIndex = index;
-      lightboxImage.src = images[index].src;
-      lightboxCaption.textContent = images[index].caption;
+      currentContentType = type;
+      if (type === 'image') {
+        lightboxImage.src = images[index].src;
+        lightboxImage.style.display = 'block';
+        lightboxVideo.style.display = 'none';
+        lightboxCaption.textContent = images[index].title;
+      } else {
+        lightboxVideo.src = videos[index].src;
+        lightboxImage.style.display = 'none';
+        lightboxVideo.style.display = 'block';
+        lightboxCaption.textContent = videos[index].caption;
+      }
       lightbox.style.display = 'block';
       setTimeout(() => lightbox.classList.add('show'), 10);
     }
 
     function closeLightbox() {
       lightbox.classList.remove('show');
-      setTimeout(() => (lightbox.style.display = 'none'), 300);
+      setTimeout(() => {
+        lightbox.style.display = 'none';
+        lightboxVideo.src = '';
+      }, 300);
     }
 
     function showPrev() {
-      currentLightboxIndex = (currentLightboxIndex - 1 + images.length) % images.length;
-      lightboxImage.src = images[currentLightboxIndex].src;
-      lightboxCaption.textContent = images[currentLightboxIndex].caption;
+      if (currentContentType === 'image') {
+        currentLightboxIndex = (currentLightboxIndex - 1 + images.length) % images.length;
+        lightboxImage.src = images[currentLightboxIndex].src;
+        lightboxCaption.textContent = images[currentLightboxIndex].title;
+      } else {
+        currentLightboxIndex = (currentLightboxIndex - 1 + videos.length) % videos.length;
+        lightboxVideo.src = videos[currentLightboxIndex].src;
+        lightboxCaption.textContent = videos[currentLightboxIndex].caption;
+      }
     }
 
     function showNext() {
-      currentLightboxIndex = (currentLightboxIndex + 1) % images.length;
-      lightboxImage.src = images[currentLightboxIndex].src;
-      lightboxCaption.textContent = images[currentLightboxIndex].caption;
+      if (currentContentType === 'image') {
+        currentLightboxIndex = (currentLightboxIndex + 1) % images.length;
+        lightboxImage.src = images[currentLightboxIndex].src;
+        lightboxCaption.textContent = images[currentLightboxIndex].title;
+      } else {
+        currentLightboxIndex = (currentLightboxIndex + 1) % videos.length;
+        lightboxVideo.src = videos[currentLightboxIndex].src;
+        lightboxCaption.textContent = videos[currentLightboxIndex].caption;
+      }
     }
 
-    createCarousel(); // Re-initialize to ensure event listeners are added
-    document.querySelectorAll('.icon-cards__item').forEach((item, index) => {
-      item.addEventListener('click', () => openLightbox(index));
+    document.querySelectorAll('.video-carousel__item').forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index, 'video'));
     });
 
     close.addEventListener('click', closeLightbox);
@@ -988,6 +1442,15 @@
     next.addEventListener('click', showNext);
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) closeLightbox();
+    });
+
+    // Lightbox keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('show')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      }
     });
 
     // Interactive Gradient Follow
@@ -1043,6 +1506,14 @@
     });
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Floating Social Buttons Toggle
+    var mainDiv = document.getElementById('main-button');
+    mainDiv.addEventListener('click', function(){
+      this.children.item(0).classList.toggle('fa-comments');
+      this.children.item(0).classList.toggle('fa-times');
+      this.classList.toggle('open');
     });
   </script>
 </body>
