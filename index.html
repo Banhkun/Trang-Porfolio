@@ -1,1520 +1,840 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trang Naria | MC Artist Portfolio</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <style>
-    :root {
-      --neon-pink: #ff3cac;
-      --cyber-teal: #00f3ff;
-      --deep-purple: #2a0944;
-      --gold: #ffd700;
-      --transition-speed: 0.3s;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(45deg, var(--deep-purple), #1a1a2e);
-      color: white;
-      overflow-x: hidden;
-      position: relative;
-      cursor: none;
-    }
-
-    /* Custom Cursor */
-    .custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 20px;
-      background: var(--neon-pink);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
-      z-index: 10000;
-    }
-
-    /* Preloader */
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1a1a2e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      transition: opacity 0.5s ease;
-    }
-    .loader {
-      border: 8px solid rgba(255, 255, 255, 0.1);
-      border-top: 8px solid var(--cyber-teal);
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Header */
-    header {
-      position: fixed;
-      width: 100%;
-      padding: 1rem 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      border-bottom: 2px solid var(--neon-pink);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      position: relative;
-      padding: 0.5rem;
-      transition: var(--transition-speed);
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background: var(--cyber-teal);
-      transition: var(--transition-speed);
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-    }
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: white;
-      transition: var(--transition-speed);
-    }
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 70px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 1rem;
-      border-radius: 10px;
-      z-index: 1001;
-    }
-    .mobile-nav a {
-      display: block;
-      padding: 0.5rem 1rem;
-      color: white;
-      text-decoration: none;
-    }
-    .mobile-nav a:hover {
-      background: var(--cyber-teal);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 8rem 2rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(var(--neon-pink), transparent);
-      filter: blur(100px);
-      top: -50px;
-      left: -50px;
-      opacity: 0.3;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      animation: fadeInUp 1.5s ease forwards;
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #fff, var(--cyber-teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    }
-    .hero p {
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-    .cta-button {
-      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      color: white;
-      text-decoration: none;
-      display: inline-block;
-      transition: transform var(--transition-speed);
-    }
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 60, 172, 0.5);
-    }
-    .hero-image {
-      position: relative;
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      overflow: hidden;
-      transform: rotate(5deg);
-      box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-      transition: transform 0.5s, border-radius 0.5s;
-    }
-    .hero-image:hover {
-      transform: rotate(0deg);
-      border-radius: 20px;
-    }
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .scroll-indicator {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 50px;
-      border: 2px solid var(--cyber-teal);
-      border-radius: 25px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 5px;
-      z-index: 1;
-    }
-    .scroll-indicator::after {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--cyber-teal);
-      border-radius: 50%;
-      animation: scroll 2s infinite;
-    }
-    @keyframes scroll {
-      0% { opacity: 0; transform: translateY(0); }
-      50% { opacity: 1; transform: translateY(10px); }
-      100% { opacity: 0; transform: translateY(20px); }
-    }
-
-    /* Modern 3D Card Slider */
-    .gallery {
-      padding: 4rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .gallery h2 {
-      text-align: center;
-      margin-bottom: 3rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .card-slider {
-      position: relative;
-      width: 100%;
-      height: 500px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1000px;
-      overflow: visible;
-    }
-
-    .cards-container {
-      position: relative;
-      width: 300px;
-      height: 400px;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
-    }
-
-    .card {
-      position: absolute;
-      width: 300px;
-      height: 400px;
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
-      transform-style: preserve-3d;
-      border: 2px solid rgba(255, 60, 172, 0.3);
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(255, 60, 172, 0.2);
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255, 60, 172, 0.1), rgba(0, 243, 255, 0.1));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.1);
-    }
-
-    .card-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 20px;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-      color: white;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-      z-index: 2;
-    }
-
-    .card:hover .card-info {
-      transform: translateY(0);
-    }
-
-    .card-info h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--cyber-teal);
-    }
-
-    .card-info p {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    /* Navigation buttons */
-    .slider-nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .nav-btn {
-      width: 60px;
-      height: 60px;
-      border: none;
-      border-radius: 50%;
-      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 60, 172, 0.5);
-    }
-
-    .nav-btn:active {
-      transform: scale(0.95);
-    }
-
-    /* Indicators */
-    .slider-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .indicator.active {
-      background: var(--cyber-teal);
-      box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-    }
-
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 1001;
-      padding-top: 100px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0);
-      opacity: 0;
-      transition: opacity 0.3s ease, background-color 0.3s ease;
-    }
-    .lightbox.show {
-      display: block;
-      opacity: 1;
-      background-color: rgba(0, 0, 0, 0.9);
-    }
-    .lightbox-image, .lightbox-video {
-      margin: auto;
-      display: block;
-      width: 80%;
-      max-width: 700px;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-    .lightbox.show .lightbox-image, .lightbox.show .lightbox-video {
-      transform: scale(1);
-    }
-    .lightbox-caption {
-      margin: auto;
-      display: block;
-      width: 80%;
-      max-width: 700px;
-      text-align: center;
-      color: #ccc;
-      padding: 10px 0;
-      height: 150px;
-    }
-    .close {
-      position: absolute;
-      top: 15px;
-      right: 35px;
-      color: #f1f1f1;
-      font-size: 40px;
-      font-weight: bold;
-      transition: var(--transition-speed);
-    }
-    .close:hover,
-    .close:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .prev,
-    .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -50px;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-    }
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-    .prev:hover,
-    .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Video Carousel Section */
-    .video-section {
-      padding: 4rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .video-section h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Playfair Display', serif;
-    }
-    .video-carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 1.5rem;
-      padding: 1rem;
-      scrollbar-width: none;
-    }
-    .video-carousel::-webkit-scrollbar {
-      display: none;
-    }
-    .video-carousel__item {
-      flex: 0 0 auto;
-      width: 280px;
-      height: 500px;
-      position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      scroll-snap-align: start;
-      cursor: pointer;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-    }
-    .video-carousel__item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(255, 60, 172, 0.3);
-    }
-    .video-carousel__item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .video-carousel__play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.7;
-      transition: opacity var(--transition-speed);
-    }
-    .video-carousel__item:hover .video-carousel__play {
-      opacity: 1;
-    }
-    .video-carousel__play::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-left: 20px solid var(--cyber-teal);
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-    }
-    .video-carousel__caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 1rem;
-      text-align: center;
-      color: white;
-      font-size: 1rem;
-      font-weight: 400;
-      opacity: 0;
-      transition: opacity var(--transition-speed);
-    }
-    .video-carousel__item:hover .video-carousel__caption {
-      opacity: 1;
-    }
-
-    /* Testimonials Section */
-    .testimonials {
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-      margin: 4rem auto;
-      max-width: 800px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 60, 172, 0.3);
-      padding: 4rem 2rem;
-    }
-    .testimonials h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Playfair Display', serif;
-    }
-    .testimonial {
-      margin: 2rem 0;
-      font-style: italic;
-      position: relative;
-    }
-    .testimonial::before {
-      content: '"';
-      font-size: 3rem;
-      color: var(--neon-pink);
-      position: absolute;
-      left: -2rem;
-      top: -1rem;
-    }
-
-    /* Services Section */
-    .services {
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-      margin: 4rem auto;
-      max-width: 800px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 60, 172, 0.3);
-      padding: 4rem 2rem;
-    }
-    .services h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Playfair Display', serif;
-    }
-    .services ul {
-      list-style: none;
-      padding: 0;
-    }
-    .services li {
-      margin: 1rem 0;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-
-    /* Contact Section */
-    .contact {
-      padding: 4rem 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-      margin: 4rem auto;
-      max-width: 800px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 60, 172, 0.3);
-    }
-    .contact h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Playfair Display', serif;
-    }
-    .contact-form {
-      display: grid;
-      gap: 1.5rem;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--neon-pink);
-      padding: 1rem;
-      color: white;
-      border-radius: 10px;
-      transition: var(--transition-speed);
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      background: rgba(255, 60, 172, 0.1);
-    }
-    .contact-form button {
-      background: linear-gradient(45deg, var(--neon-pink), var(--cyber-teal));
-      border: none;
-      padding: 1rem 2rem;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: var(--transition-speed);
-    }
-    .contact-form button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 60, 172, 0.5);
-    }
-
-    /* Footer */
-    footer {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: var(--cyber-teal);
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      background: var(--cyber-teal);
-      padding: 0.8rem;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      z-index: 1001;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      transition: var(--transition-speed);
-    }
-    .back-to-top:hover {
-      transform: scale(1.1);
-    }
-
-    /* Media Queries */
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .hero-image {
-        width: 80%;
-        margin: 2rem auto;
-      }
-      .nav-links {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .video-carousel__item {
-        width: 200px;
-        height: 350px;
-      }
-    }
-
-    @media (min-width: 769px) {
-      .slider-nav {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        transform: translateY(-50%);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 0;
-        padding: 0 20px;
-        pointer-events: none;
-      }
-      .nav-btn {
-        pointer-events: auto;
-      }
-      .slider-indicators {
-        margin-top: 3rem;
-      }
-    }
-
-    /* Floating Animation */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    .floating {
-      animation: float 4s ease-in-out infinite;
-    }
-
-    /* Floating Social Buttons Styles */
-    #main-div {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 1001;
-    }
-
-    #main-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      height: 50px;
-      width: 50px;
-      font-size: 20px;
-      color: #0064f3;
-      cursor: pointer;
-      background-color: #fff;
-      box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
-      border-radius: 50%;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
-    }
-
-    #main-button ~ a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      height: 50px;
-      width: 50px;
-      font-size: 20px;
-      opacity: 0;
-      text-decoration: none;
-      color: #fff;
-      background-color: #fff;
-      box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
-      border-radius: 50%;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
-      transition: .2s all linear;
-      -webkit-transition: .2s all linear;
-      -moz-transition: .2s all linear;
-      -ms-transition: .2s all linear;
-      -o-transition: .2s all linear;
-    }
-
-    #main-button ~ .telegram-color {
-      background: linear-gradient(0deg, #017AB1, #01ABE6);
-    }
-
-    #main-button ~ .zalo-color {
-      background: linear-gradient(0deg, #0068ff, #0098ff);
-    }
-
-    #main-button ~ .messenger-color {
-      background: linear-gradient(0deg, #0078FF, #00C6FF);
-    }
-
-    #main-button.open ~ a {
-      opacity: 1;
-      transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
-      -webkit-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
-      -moz-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
-      -ms-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
-      -o-transition: .4s all cubic-bezier(0, 0.01, 0, 1.27);
-    }
-    #main-button.open ~ a:nth-of-type(1) {
-      bottom: 60px;
-    }
-    #main-button.open ~ a:nth-of-type(2) {
-      bottom: 120px;
-    }
-    #main-button.open ~ a:nth-of-type(3) {
-      bottom: 180px;
-    }
-
-    .wave {
-      animation-name: wave;
-      animation-duration: 1s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes wave {
-      0% {box-shadow: 0 0 0px 0px rgba(255, 255, 255, 0.5);}
-      100% {box-shadow: 0 0 0px 10px rgba(255, 255, 255, 0);}
-    }
-
-    .open {
-      animation-iteration-count: 1;
-    }
-  </style>
-</head>
-<body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="loader"></div>
-  </div>
-
-  <!-- Custom Cursor -->
-  <div class="custom-cursor"></div>
-
-  <!-- Header -->
-  <header>
-    <div class="logo">MC Thùy Trang</div>
-    <nav>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#video">Performance</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </nav>
-    <div class="mobile-nav" id="mobile-nav">
-      <a href="#home">Home</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#video">Performance</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1 class="floating">The Art of<br />Stage Presence</h1>
-      <p>MC • Host • Creative Visionary</p>
-      <a href="#contact" class="cta-button">Book Now</a>
-    </div>
-    <div class="hero-image floating">
-      <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=500&h=600&fit=crop&crop=face" alt="MC Portrait" loading="lazy" />
-    </div>
-    <div class="scroll-indicator"></div>
-  </section>
-
-  <!-- Gallery Section with Modern 3D Card Slider -->
-  <section class="gallery" id="gallery">
-    <h2>Gallery</h2>
-    <div class="card-slider">
-      <div class="cards-container" id="cards-container">
-        <!-- Cards will be dynamically generated -->
-      </div>
-    </div>
-    <div class="slider-nav">
-      <button class="nav-btn" id="prev-btn">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="nav-btn" id="next-btn">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-    <div class="slider-indicators" id="slider-indicators">
-      <!-- Indicators will be dynamically generated -->
-    </div>
-  </section>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <span class="close">&times;</span>
-    <img class="lightbox-image" id="lightbox-image" src="" />
-    <iframe class="lightbox-video" id="lightbox-video" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen></iframe>
-    <div class="lightbox-caption" id="lightbox-caption"></div>
-    <a class="prev" id="prev">&#10094;</a>
-    <a class="next" id="next">&#10095;</a>
-  </div>
-
-  <!-- Video Carousel Section -->
-  <section class="video-section" id="video">
-    <h2>Performances</h2>
-    <div class="video-carousel" id="video-carousel"></div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="testimonials" id="testimonials">
-    <h2>Testimonials</h2>
-    <div class="testimonial">
-      <p>"MC Thùy Trang made our event unforgettable! Her energy and professionalism are unmatched." - Client Name</p>
-    </div>
-    <div class="testimonial">
-      <p>"Absolutely fantastic MC! She kept the audience engaged throughout the event." - Another Client</p>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section class="services" id="services">
-    <h2>Services</h2>
-    <ul>
-      <li>Event Hosting</li>
-      <li>Voice-Overs</li>
-      <li>Custom Introductions</li>
-    </ul>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <h2>Let's Create Magic</h2>
-    <form class="contact-form" action="https://formspree.io/f/yourformid" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea rows="5" name="message" placeholder="Your Vision" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 MC Thùy Trang. All Rights Reserved.
-    <p>
-      <a href="#">Instagram</a> |
-      <a href="#">Facebook</a> |
-      <a href="#">Twitter</a>
-    </p>
-  </footer>
-
-  <!-- Back to Top Button -->
-  <div class="back-to-top" id="back-to-top">&#8679;</div>
-
-  <!-- Floating Social Buttons -->
-  <div id="main-div">
-    <div id="main-button" class="wave">
-      <i class="fas fa-comments"></i>
-    </div>
-    <a href="https://t.me/trangnaria" class="telegram-color" title="Telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-    <a href="https://zalo.me/0963711301" class="zalo-color" title="Zalo Chat" target="_blank"><i class="fas fa-comment-dots"></i></a>
-    <a href="https://m.me/mcvothuytrang" class="messenger-color" title="Facebook Messenger" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
-  </div>
-
-  <!-- JavaScript -->
-  <script>
-    // Preloader
-    window.addEventListener('DOMContentLoaded', function () {
-      const preloader = document.getElementById('preloader');
-      const hidePreloader = () => {
-        preloader.style.opacity = '0';
-        setTimeout(() => (preloader.style.display = 'none'), 500);
-      };
-      setTimeout(hidePreloader, 2000);
-      hidePreloader();
-    });
-
-    // Custom Cursor
-    const cursor = document.querySelector('.custom-cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-
-    // Hamburger Menu Toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobile-nav');
-    hamburger.addEventListener('click', () => {
-      mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
-    });
-    document.querySelectorAll('.mobile-nav a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileNav.style.display = 'none';
-      });
-    });
-
-    // Modern 3D Card Slider
-    const images = [
-      { 
-        src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=1200&fit=crop', 
-        alt: 'Wedding Event', 
-        title: 'Wedding Ceremony',
-        description: 'Elegant wedding hosting with grace and style'
-      },
-      { 
-        src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=1200&fit=crop', 
-        alt: 'Corporate Event', 
-        title: 'Corporate Gala',
-        description: 'Professional corporate event management'
-      },
-      { 
-        src: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&h=1200&fit=crop', 
-        alt: 'Birthday Party', 
-        title: 'Birthday Celebration',
-        description: 'Fun and engaging birthday party hosting'
-      },
-      { 
-        src: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=1200&fit=crop', 
-        alt: 'Music Concert', 
-        title: 'Music Concert',
-        description: 'Dynamic concert hosting and crowd engagement'
-      },
-      { 
-        src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=1200&fit=crop', 
-        alt: 'Award Ceremony', 
-        title: 'Award Ceremony',
-        description: 'Prestigious award ceremony hosting'
-      }
-    ];
-
-    const cardsContainer = document.getElementById('cards-container');
-    const sliderIndicators = document.getElementById('slider-indicators');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-
-    let currentIndex = 2; // Start with the middle card active
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
-
-    const baseCardWidth = 300;
-    const baseCardHeight = 400;
-    const baseZNear = 150;
-    const baseZFar = 300;
-    const basePerspective = 1200;
-    const baseAngleNear = 25;
-    const baseAngleFar = 50;
-    const spreadFactor = 0.8;
-    let cardWidth, cardHeight, zNear, zFar, perspective, angleNear, angleFar, spread;
-
-    function updateSizes() {
-      if (window.innerWidth <= 768) {
-        cardWidth = 250;
-        cardHeight = 350;
-        perspective = 1000;
-        zNear = -100;
-        zFar = -200;
-        angleNear = 30;
-        angleFar = 60;
-        spread = 0; // No spread on mobile
-      } else {
-        cardWidth = Math.min(500, window.innerWidth * 0.35);
-        cardHeight = cardWidth * (baseCardHeight / baseCardWidth);
-        const factor = cardWidth / baseCardWidth;
-        zNear = - (baseZNear * factor);
-        zFar = - (baseZFar * factor);
-        perspective = basePerspective * factor;
-        angleNear = baseAngleNear;
-        angleFar = baseAngleFar;
-        spread = cardWidth * spreadFactor;
-      }
-      cardsContainer.style.width = `${cardWidth}px`;
-      cardsContainer.style.height = `${cardHeight}px`;
-      cardsContainer.parentElement.style.height = `${cardHeight}px`;
-      cardsContainer.parentElement.style.perspective = `${perspective}px`;
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.style.width = `${cardWidth}px`;
-        card.style.height = `${cardHeight}px`;
-      });
-    }
-
-    // Create cards
-    function createCards() {
-      cardsContainer.innerHTML = '';
-      sliderIndicators.innerHTML = '';
-      
-      images.forEach((image, index) => {
-        // Create card
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${image.src}" alt="${image.alt}" loading="lazy" />
-          <div class="card-info">
-            <h3>${image.title}</h3>
-            <p>${image.description}</p>
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <title>MC Thùy Trang | Dẫn chương trình sự kiện &amp; tiệc cưới</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Playfair+Display:wght@400;600&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="antialiased bg-gradient-to-br from-[#D1E9F6]/40 via-[#F6EACB]/40 to-[#EECAD5]/40 text-slate-900">
+    <!-- Wrapper -->
+    <div class="min-h-screen flex flex-col">
+
+      <!-- Nav -->
+      <header class="sticky top-0 z-40 backdrop-blur bg-[#D1E9F6]/80 border-b border-slate-200/70">
+        <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center gap-2">
+            <div class="h-8 w-8 rounded-full bg-[#F1D3CE] flex items-center justify-center text-xs font-semibold tracking-tight text-slate-900 shadow-sm border border-slate-100">
+              MC
+            </div>
+            <div class="flex flex-col leading-tight">
+              <span class="text-base sm:text-lg font-semibold tracking-tight text-slate-900">MC Thùy Trang</span>
+              <span class="text-xs sm:text-sm text-slate-600">Dẫn chương trình tiệc cưới &amp; sự kiện</span>
+            </div>
           </div>
-        `;
-        cardsContainer.appendChild(card);
+          <nav class="hidden md:flex items-center gap-8 text-sm">
+            <a href="#home" class="text-slate-700 hover:text-slate-900 transition-colors">Trang chủ</a>
+            <a href="#gallery" class="text-slate-700 hover:text-slate-900 transition-colors">Hình ảnh</a>
+            <a href="#video" class="text-slate-700 hover:text-slate-900 transition-colors">Video</a>
+            <a href="#testimonials" class="text-slate-700 hover:text-slate-900 transition-colors">Cảm nhận</a>
+            <a href="#services" class="text-slate-700 hover:text-slate-900 transition-colors">Dịch vụ</a>
+            <a href="#contact" class="text-slate-700 hover:text-slate-900 transition-colors">Liên hệ</a>
+          </nav>
+          <a href="#contact" class="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-slate-900 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-slate-800 hover:border-slate-900/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#F1D3CE]">
+            Đặt lịch
+          </a>
+          <button class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-full border border-slate-300 bg-[#D1E9F6] text-slate-700 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]" aria-label="Toggle menu" id="mobile-toggle">
+            <svg id="mobile-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg id="mobile-close" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 6L6 18M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
 
-        // Create indicator
-        const indicator = document.createElement('div');
-        indicator.className = `indicator ${index === currentIndex ? 'active' : ''}`;
-        indicator.addEventListener('click', () => goToSlide(index));
-        sliderIndicators.appendChild(indicator);
-      });
+        <!-- Mobile nav -->
+        <div id="mobile-nav" class="md:hidden hidden border-t border-slate-200/70 bg-[#D1E9F6]/90 backdrop-blur">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col gap-2 text-sm">
+            <a href="#home" class="py-1 text-slate-800 hover:text-slate-900">Trang chủ</a>
+            <a href="#gallery" class="py-1 text-slate-800 hover:text-slate-900">Hình ảnh</a>
+            <a href="#video" class="py-1 text-slate-800 hover:text-slate-900">Video</a>
+            <a href="#testimonials" class="py-1 text-slate-800 hover:text-slate-900">Cảm nhận</a>
+            <a href="#services" class="py-1 text-slate-800 hover:text-slate-900">Dịch vụ</a>
+            <a href="#contact" class="py-1 text-slate-800 hover:text-slate-900">Liên hệ</a>
+          </div>
+        </div>
+      </header>
 
-      updateSizes();
-      updateCards();
-    }
+      <main class="flex-1">
+        <!-- Hero -->
+        <section id="home" class="relative">
+          <div class="absolute inset-0 -z-10">
+            <div class="max-w-6xl mx-auto h-full opacity-70 pointer-events-none">
+              <div class="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-[#F6EACB]/70 blur-3xl"></div>
+              <div class="absolute top-10 right-0 w-72 h-72 rounded-full bg-[#D1E9F6]/70 blur-3xl"></div>
+              <div class="absolute bottom-0 left-1/3 w-72 h-72 rounded-full bg-[#EECAD5]/60 blur-3xl"></div>
+            </div>
+          </div>
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+            <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/80 px-3 py-1 shadow-sm">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                  <span class="text-xs sm:text-sm text-slate-700">Nhận lịch tại TP.HCM • Nha Trang • Long An</span>
+                </div>
+                <h1 class="font-['Playfair_Display'] tracking-tight text-3xl sm:text-4xl lg:text-5xl text-slate-900">
+                  Dẫn dắt nhẹ nhàng,<br class="hidden sm:inline"> kết nối những khoảnh khắc đáng nhớ
+                </h1>
+                <p class="text-base sm:text-lg text-slate-700">
+                  MC chuyên nghiệp cho tiệc cưới, sự kiện doanh nghiệp và các chương trình trực tiếp — phong cách ấm áp, tinh tế, dẫn dắt tự nhiên.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-flex items-center gap-1.5 rounded-full border border-[#F6EACB]/80 bg-[#F6EACB]/60 text-xs sm:text-sm text-slate-800 px-3 py-1">
+                    <span class="h-1.5 w-1.5 rounded-full bg-slate-700/70"></span>
+                    TP.HCM
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 rounded-full border border-[#D1E9F6]/80 bg-[#D1E9F6]/70 text-xs sm:text-sm text-slate-800 px-3 py-1">
+                    <span class="h-1.5 w-1.5 rounded-full bg-slate-700/70"></span>
+                    Nha Trang
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 rounded-full border border-[#EECAD5]/80 bg-[#EECAD5]/70 text-xs sm:text-sm text-slate-800 px-3 py-1">
+                    <span class="h-1.5 w-1.5 rounded-full bg-slate-700/70"></span>
+                    Long An
+                  </span>
+                </div>
+                <div class="flex flex-wrap items-center gap-4">
+                  <a href="#contact" class="inline-flex items-center justify-center rounded-full border border-slate-900/10 bg-slate-900 text-white text-sm font-medium px-5 py-2.5 shadow-sm hover:bg-slate-800 hover:border-slate-900/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#F1D3CE]">
+                    Đặt lịch sự kiện
+                  </a>
+                  <a href="#video" class="inline-flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#F1D3CE]">
+                    <span>Xem showreel</span>
+                    <span class="inline-flex items-center justify-center h-7 w-7 rounded-full border border-slate-300 bg-white">
+                      <svg id="play-icon-hero" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M7 4v16l13-8-13-8z"></path>
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+                <div class="grid grid-cols-3 gap-4 max-w-md pt-4 border-t border-slate-200/80">
+                  <div class="space-y-1">
+                    <p class="text-2xl font-semibold tracking-tight text-slate-900">100+</p>
+                    <p class="text-xs sm:text-sm text-slate-600">Sự kiện đã dẫn</p>
+                  </div>
+                  <div class="space-y-1">
+                    <p class="text-2xl font-semibold tracking-tight text-slate-900">5+</p>
+                    <p class="text-xs sm:text-sm text-slate-600">Năm kinh nghiệm</p>
+                  </div>
+                  <div class="space-y-1">
+                    <p class="text-2xl font-semibold tracking-tight text-slate-900">4.9</p>
+                    <p class="text-xs sm:text-sm text-slate-600">Đánh giá từ khách hàng</p>
+                  </div>
+                </div>
+              </div>
 
-    // Update card positions
-    function updateCards() {
-      const cards = document.querySelectorAll('.card');
-      const indicators = document.querySelectorAll('.indicator');
-      
-      cards.forEach((card, index) => {
-        card.style.transform = '';
-        card.style.opacity = '';
-        card.style.zIndex = '';
-        
-        const position = index - currentIndex;
-        let transform = '';
-        let opacity = 1;
-        let zIndex = 0;
+              <div class="relative">
+                <div class="relative w-full max-w-sm mx-auto">
+                  <div class="absolute -inset-4 bg-gradient-to-br from-[#D1E9F6]/60 via-[#F6EACB]/60 to-[#EECAD5]/60 blur-2xl opacity-80"></div>
+                  <div class="relative rounded-3xl bg-white/90 border border-slate-100 shadow-xl shadow-slate-900/5 overflow-hidden">
+                    <div class="aspect-[4/5] overflow-hidden">
+                      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="MC trên sân khấu trong buổi tiệc trang trọng" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3 border-t border-slate-100 bg-gradient-to-br from-white via-white to-[#F6EACB]/30">
+                      <div class="flex items-center justify-between gap-3">
+                        <div>
+                          <p class="text-sm font-medium text-slate-900 tracking-tight">Tiệc cưới tối</p>
+                          <p class="text-xs sm:text-sm text-slate-600">TP.HCM · 250 khách</p>
+                        </div>
+                        <span class="inline-flex items-center rounded-full bg-[#D1E9F6]/30 border border-[#D1E9F6]/80 px-2.5 py-1 text-[0.7rem] font-medium text-slate-800">
+                          Dẫn trực tiếp
+                        </span>
+                      </div>
+                      <div class="flex items-center justify-between gap-3 text-xs sm:text-sm text-slate-700">
+                        <div class="flex items-center gap-1.5">
+                          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                          <span>Phong cách nhẹ nhàng, song ngữ</span>
+                        </div>
+                        <a href="#gallery" class="underline underline-offset-2 hover:text-slate-900">
+                          Xem toàn bộ hình ↓
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-        if (position === -2) {
-          transform = `translateX(${-spread * 1.5}px) rotateY(${-angleFar}deg) translateZ(${zFar}px)`;
-          opacity = 0.5;
-          zIndex = 1;
-        } else if (position === -1) {
-          transform = `translateX(${-spread * 0.8}px) rotateY(${-angleNear}deg) translateZ(${zNear}px)`;
-          opacity = 0.75;
-          zIndex = 2;
-        } else if (position === 0) {
-          transform = `rotateY(0deg) translateZ(0px)`;
-          opacity = 1;
-          zIndex = 10;
-        } else if (position === 1) {
-          transform = `translateX(${spread * 0.8}px) rotateY(${angleNear}deg) translateZ(${zNear}px)`;
-          opacity = 0.75;
-          zIndex = 2;
-        } else if (position === 2) {
-          transform = `translateX(${spread * 1.5}px) rotateY(${angleFar}deg) translateZ(${zFar}px)`;
-          opacity = 0.5;
-          zIndex = 1;
-        } else {
-          opacity = 0;
-          zIndex = 0;
+                <div class="hidden sm:flex flex-col gap-2 absolute -left-4 top-10">
+                  <div class="rounded-2xl bg-white/90 border border-slate-100 shadow-sm px-3 py-2">
+                    <p class="text-xs text-slate-500">Thế mạnh</p>
+                    <p class="text-xs font-medium text-slate-800">Tiệc cưới · Doanh nghiệp · Gala</p>
+                  </div>
+                  <div class="rounded-full bg-white/90 border border-slate-100 shadow-sm px-3 py-1.5 text-[0.7rem] text-slate-600">
+                    Bình tĩnh, tự tin trên mọi sân khấu
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gallery with carousel -->
+        <section id="gallery" class="py-12 sm:py-16 lg:py-20">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+              <div>
+                <h2 class="font-['Playfair_Display'] tracking-tight text-2xl sm:text-3xl text-slate-900">
+                  Khoảnh khắc trên sân khấu
+                </h2>
+                <p class="text-base sm:text-lg text-slate-700 mt-1">
+                  Một vài hình ảnh từ tiệc cưới, sự kiện doanh nghiệp và các buổi lễ được Trang dẫn dắt.
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                <span class="inline-flex items-center rounded-full border border-[#F1D3CE]/80 bg-[#F1D3CE]/60 text-slate-800 px-3 py-1">Tiệc cưới</span>
+                <span class="inline-flex items-center rounded-full border border-[#D1E9F6]/80 bg-[#D1E9F6]/70 text-slate-800 px-3 py-1">Doanh nghiệp</span>
+                <span class="inline-flex items-center rounded-full border border-[#EECAD5]/80 bg-[#EECAD5]/70 text-slate-800 px-3 py-1">Gala</span>
+              </div>
+            </div>
+
+            <div class="relative">
+              <!-- Carousel controls -->
+              <div class="absolute inset-y-0 left-0 flex items-center -ml-3">
+                <button id="gallery-prev" type="button" class="inline-flex items-center justify-center rounded-full bg-white/90 border border-slate-200 shadow-sm h-9 w-9 text-slate-700 hover:border-slate-400 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M15 18l-6-6 6-6"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="absolute inset-y-0 right-0 flex items-center -mr-3">
+                <button id="gallery-next" type="button" class="inline-flex items-center justify-center rounded-full bg-white/90 border border-slate-200 shadow-sm h-9 w-9 text-slate-700 hover:border-slate-400 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 18l6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Carousel viewport -->
+              <div id="gallery-viewport" class="overflow-hidden">
+                <!-- Carousel track -->
+                <div id="gallery-track" class="flex gap-5 transition-transform duration-500 ease-out">
+                  <article class="group rounded-2xl bg-white/90 border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+                    <div class="relative overflow-hidden">
+                      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Sân khấu tiệc cưới sang trọng" class="w-full h-56 object-cover transition-transform group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none"></div>
+                      <div class="absolute bottom-2 left-2 rounded-full bg-black/55 backdrop-blur px-2.5 py-1 text-[0.7rem] text-white">
+                        Tiệc cưới · Saigon
+                      </div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                        Tiệc cưới ấm cúng buổi tối
+                      </h3>
+                      <p class="text-sm text-slate-700">
+                        Dẫn dắt nhẹ nhàng, hỗ trợ gia đình và khách mời trong suốt chương trình, không khí lãng mạn.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="group rounded-2xl bg-white/90 border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+                    <div class="relative overflow-hidden">
+                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Sân khấu sự kiện doanh nghiệp" class="w-full h-56 object-cover transition-transform group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none"></div>
+                      <div class="absolute bottom-2 left-2 rounded-full bg-black/55 backdrop-blur px-2.5 py-1 text-[0.7rem] text-white">
+                        Doanh nghiệp · Nha Trang
+                      </div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                        Đêm Gala thường niên
+                      </h3>
+                      <p class="text-sm text-slate-700">
+                        Phong cách chuyên nghiệp, đúng timeline, giữ năng lượng cho khán phòng suốt chương trình.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="group rounded-2xl bg-white/90 border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+                    <div class="relative overflow-hidden">
+                      <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Sân khấu lễ hội ngoài trời" class="w-full h-56 object-cover transition-transform group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none"></div>
+                      <div class="absolute bottom-2 left-2 rounded-full bg-black/55 backdrop-blur px-2.5 py-1 text-[0.7rem] text-white">
+                        Lễ hội · Long An
+                      </div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                        Đêm hội ngoài trời
+                      </h3>
+                      <p class="text-sm text-slate-700">
+                        Không khí sôi động, giao lưu với khán giả, dẫn dắt trò chơi và tiết mục biểu diễn.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="group rounded-2xl bg-white/90 border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+                    <div class="relative overflow-hidden">
+                      <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Tiệc sinh nhật" class="w-full h-56 object-cover transition-transform group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none"></div>
+                      <div class="absolute bottom-2 left-2 rounded-full bg-black/55 backdrop-blur px-2.5 py-1 text-[0.7rem] text-white">
+                        Riêng tư · TP.HCM
+                      </div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                        Tiệc sinh nhật cột mốc
+                      </h3>
+                      <p class="text-sm text-slate-700">
+                        Không khí gần gũi, nội dung được cá nhân hoá theo nhân vật chính và gia đình.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="group rounded-2xl bg-white/90 border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+                    <div class="relative overflow-hidden">
+                      <img src="https://images.unsplash.com/photo-1486591038957-19e7c73bdc41?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Lễ trao giải" class="w-full h-56 object-cover transition-transform group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none"></div>
+                      <div class="absolute bottom-2 left-2 rounded-full bg-black/55 backdrop-blur px-2.5 py-1 text-[0.7rem] text-white">
+                        Trao giải · Saigon
+                      </div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                        Đêm vinh danh &amp; trao giải
+                      </h3>
+                      <p class="text-sm text-slate-700">
+                        Trang trọng, rõ ràng trong từng phần giới thiệu, tên giải thưởng và khách mời.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="group rounded-2xl bg-white/90 border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+                    <div class="relative overflow-hidden">
+                      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Sân khấu âm nhạc trực tiếp" class="w-full h-56 object-cover transition-transform group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none"></div>
+                      <div class="absolute bottom-2 left-2 rounded-full bg-black/55 backdrop-blur px-2.5 py-1 text-[0.7rem] text-white">
+                        Concert · Việt Nam
+                      </div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                        Dẫn chương trình ca nhạc trực tiếp
+                      </h3>
+                      <p class="text-sm text-slate-700">
+                        Giới thiệu nghệ sĩ, kết nối các tiết mục, giữ nhịp cho cả sân khấu và khán giả.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel indicators -->
+            <div class="mt-4 flex justify-center gap-1.5">
+              <button class="gallery-dot h-1.5 w-4 rounded-full bg-slate-400/70"></button>
+              <button class="gallery-dot h-1.5 w-4 rounded-full bg-slate-300/70"></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Video / Performances with carousel -->
+        <section id="video" class="py-12 sm:py-16 lg:py-20 border-t border-slate-200/80 bg-[#D1E9F6]/40">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+              <div>
+                <h2 class="font-['Playfair_Display'] tracking-tight text-2xl sm:text-3xl text-slate-900">
+                  Video dẫn chương trình
+                </h2>
+                <p class="text-base sm:text-lg text-slate-700 mt-1">
+                  Một số trích đoạn thực tế từ các chương trình Trang đã dẫn.
+                </p>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 max-w-xs">
+                Showreel đầy đủ và các video khác có thể được gửi qua email hoặc ứng dụng chat theo yêu cầu.
+              </p>
+            </div>
+
+            <div class="relative">
+              <!-- Carousel controls -->
+              <div class="absolute inset-y-0 left-0 flex items-center -ml-3">
+                <button id="video-prev" type="button" class="inline-flex items-center justify-center rounded-full bg-white/90 border border-slate-200 shadow-sm h-9 w-9 text-slate-700 hover:border-slate-400 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M15 18l-6-6 6-6"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="absolute inset-y-0 right-0 flex items-center -mr-3">
+                <button id="video-next" type="button" class="inline-flex items-center justify-center rounded-full bg-white/90 border border-slate-200 shadow-sm h-9 w-9 text-slate-700 hover:border-slate-400 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 18l6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Video viewport -->
+              <div id="video-viewport" class="overflow-hidden">
+                <!-- Carousel track -->
+                <div id="video-track" class="flex gap-6 lg:gap-8 transition-transform duration-500 ease-out">
+                  <!-- Slide 1 -->
+                  <div class="group rounded-2xl overflow-hidden border border-slate-200/80 bg-white/90 hover:border-[#D1E9F6]/80 transition-colors flex-shrink-0 w-full md:w-1/2">
+                    <div class="relative aspect-video bg-slate-200">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/8kmr9_FXTXQ?rel=0&amp;modestbranding=1" title="Dẫn chương trình tiệc cưới" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/5"></div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-1.5">
+                      <p class="text-sm font-semibold tracking-tight text-slate-900">
+                        Dẫn tiệc cưới nhẹ nhàng
+                      </p>
+                      <p class="text-sm text-slate-700">
+                        Giọng nói ấm, chuyển tiếp tự nhiên giữa các phần lễ, trò chơi và phát biểu.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 2 -->
+                  <div class="group rounded-2xl overflow-hidden border border-slate-200/80 bg-white/90 hover:border-[#F6EACB]/80 transition-colors flex-shrink-0 w-full md:w-1/2">
+                    <div class="relative aspect-video bg-slate-200">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/57hfgGDeaYI?rel=0&amp;modestbranding=1" title="Dẫn chương trình sự kiện doanh nghiệp" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/5"></div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-1.5">
+                      <p class="text-sm font-semibold tracking-tight text-slate-900">
+                        Gala &amp; sự kiện doanh nghiệp
+                      </p>
+                      <p class="text-sm text-slate-700">
+                        Cấu trúc rõ ràng, phong thái chuyên nghiệp, phù hợp môi trường doanh nghiệp và đối tác.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 3 -->
+                  <div class="group rounded-2xl overflow-hidden border border-slate-200/80 bg-white/90 hover:border-[#F1D3CE]/80 transition-colors flex-shrink-0 w-full md:w-1/2">
+                    <div class="relative aspect-video bg-slate-200">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&amp;modestbranding=1" title="Dẫn chương trình lễ hội" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/5"></div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-1.5">
+                      <p class="text-sm font-semibold tracking-tight text-slate-900">
+                        Lễ hội &amp; chương trình ngoài trời
+                      </p>
+                      <p class="text-sm text-slate-700">
+                        Tạo bầu không khí sôi nổi, tương tác khán giả, giữ lửa cho chương trình dài.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 4 -->
+                  <div class="group rounded-2xl overflow-hidden border border-slate-200/80 bg-white/90 hover:border-[#EECAD5]/80 transition-colors flex-shrink-0 w-full md:w-1/2">
+                    <div class="relative aspect-video bg-slate-200">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/oHg5SJYRHA0?rel=0&amp;modestbranding=1" title="Dẫn chương trình lễ trao giải" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/5"></div>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-1.5">
+                      <p class="text-sm font-semibold tracking-tight text-slate-900">
+                        Lễ trao giải &amp; vinh danh
+                      </p>
+                      <p class="text-sm text-slate-700">
+                        Lời dẫn trau chuốt, tôn trọng nhân vật, phù hợp các chương trình có khách mời quan trọng.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel indicators -->
+            <div class="mt-4 flex justify-center gap-1.5">
+              <button class="video-dot h-1.5 w-4 rounded-full bg-slate-400/70"></button>
+              <button class="video-dot h-1.5 w-4 rounded-full bg-slate-300/70"></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-12 sm:py-16 lg:py-20">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+              <h2 class="font-['Playfair_Display'] tracking-tight text-2xl sm:text-3xl text-slate-900">
+                Cảm nhận từ khách hàng
+              </h2>
+              <p class="text-base sm:text-lg text-slate-700 mt-1">
+                Được tin tưởng bởi các cặp đôi, doanh nghiệp và đơn vị tổ chức trên khắp Việt Nam.
+              </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+              <figure class="rounded-2xl border border-slate-200/80 bg-white/90 shadow-sm p-5 sm:p-6 flex flex-col gap-4">
+                <div class="flex gap-3 items-center">
+                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Khách hàng tiệc cưới" class="h-10 w-10 rounded-full object-cover border border-white shadow-sm">
+                  <div>
+                    <figcaption class="text-sm font-semibold tracking-tight text-slate-900">
+                      Linh &amp; Nam
+                    </figcaption>
+                    <p class="text-xs text-slate-500">Cặp đôi · TP.HCM</p>
+                  </div>
+                </div>
+                <blockquote class="text-sm sm:text-base text-slate-700">
+                  “Trang hỗ trợ nhà trai – nhà gái rất tận tâm, nhắc nhở nhẹ nhàng nên mọi người đều thoải mái. Chương trình không bị gấp nhưng vẫn đúng giờ. Sau tiệc cưới, rất nhiều khách hỏi xin liên hệ của Trang.”
+                </blockquote>
+              </figure>
+
+              <figure class="rounded-2xl border border-slate-200/80 bg-white/90 shadow-sm p-5 sm:p-6 flex flex-col gap-4">
+                <div class="flex gap-3 items-center">
+                  <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Khách hàng doanh nghiệp" class="h-10 w-10 rounded-full object-cover border border-white shadow-sm">
+                  <div>
+                    <figcaption class="text-sm font-semibold tracking-tight text-slate-900">
+                      Minh Trần
+                    </figcaption>
+                    <p class="text-xs text-slate-500">Trưởng phòng Nhân sự · Công ty công nghệ</p>
+                  </div>
+                </div>
+                <blockquote class="text-sm sm:text-base text-slate-700">
+                  “Trang nắm bắt tinh thần thương hiệu rất nhanh, đề xuất nội dung phù hợp. Phong thái chỉn chu, phối hợp tốt với ban tổ chức và ekip kỹ thuật nên chương trình diễn ra trôi chảy.”
+                </blockquote>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="py-12 sm:py-16 lg:py-20 border-t border-slate-200/80 bg-white/90">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+              <div class="max-w-md">
+                <h2 class="font-['Playfair_Display'] tracking-tight text-2xl sm:text-3xl text-slate-900">
+                  Dịch vụ
+                </h2>
+                <p class="text-base sm:text-lg text-slate-700 mt-2">
+                  Mỗi chương trình đều được chuẩn bị kịch bản riêng, timeline rõ ràng và trao đổi kỹ với khách hàng trước ngày diễn ra.
+                </p>
+              </div>
+              <div class="grid md:grid-cols-3 gap-5 flex-1">
+                <div class="rounded-2xl border border-[#F1D3CE]/80 bg-[#F1D3CE]/60 p-4 sm:p-5 flex flex-col gap-2">
+                  <p class="text-sm font-semibold tracking-tight text-slate-900">Tiệc cưới &amp; lễ đính hôn</p>
+                  <p class="text-sm text-slate-800">
+                    Lễ gia tiên, tiệc cưới, tiệc thân mật với gia đình – phong cách tinh tế, tôn trọng nghi thức.
+                  </p>
+                </div>
+                <div class="rounded-2xl border border-[#D1E9F6]/80 bg-[#D1E9F6]/70 p-4 sm:p-5 flex flex-col gap-2">
+                  <p class="text-sm font-semibold tracking-tight text-slate-900">Sự kiện doanh nghiệp</p>
+                  <p class="text-sm text-slate-800">
+                    Year-end party, kick-off, lễ ra mắt sản phẩm, hội nghị khách hàng, lễ trao giải.
+                  </p>
+                </div>
+                <div class="rounded-2xl border border-[#EECAD5]/80 bg-[#EECAD5]/70 p-4 sm:p-5 flex flex-col gap-2">
+                  <p class="text-sm font-semibold tracking-tight text-slate-900">Chương trình đặc biệt khác</p>
+                  <p class="text-sm text-slate-800">
+                    Lễ hội, concert, chương trình online, voice-over và hỗ trợ biên tập lời dẫn theo yêu cầu.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-12 sm:py-16 lg:py-20">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-[1.1fr,1fr] gap-10 lg:gap-12 items-start">
+              <div>
+                <h2 class="font-['Playfair_Display'] tracking-tight text-2xl sm:text-3xl text-slate-900">
+                  Kết nối &amp; đặt lịch
+                </h2>
+                <p class="text-base sm:text-lg text-slate-700 mt-2">
+                  Hãy chia sẻ ngày tổ chức, địa điểm và mong muốn của bạn. Trang sẽ phản hồi sớm với tình trạng lịch và gợi ý flow chương trình phù hợp.
+                </p>
+
+                <div class="mt-6 space-y-3 text-sm text-slate-700">
+                  <div class="flex items-start gap-3">
+                    <div class="mt-[3px] h-2 w-2 rounded-full bg-[#D1E9F6]"></div>
+                    <p><span class="font-medium text-slate-900">Địa điểm:</span> TP.HCM · Nhận dẫn tại Nha Trang, Long An &amp; các tỉnh khác (tuỳ lịch).</p>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="mt-[3px] h-2 w-2 rounded-full bg-[#F6EACB]"></div>
+                    <p><span class="font-medium text-slate-900">Ngôn ngữ:</span> Tiếng Việt (chính) · tiếng Anh (cơ bản cho các phần giới thiệu).</p>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="mt-[3px] h-2 w-2 rounded-full bg-[#EECAD5]"></div>
+                    <p><span class="font-medium text-slate-900">Thời gian phản hồi:</span> Thường trong vòng 24 giờ.</p>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-3 text-sm">
+                  <!-- Email -->
+                  <a href="mailto:booking@mcthuytrang.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-slate-800 hover:border-[#D1E9F6] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                    <i data-lucide="mail" class="h-4 w-4"></i>
+                    <span>Email</span>
+                  </a>
+                  <!-- Telegram -->
+                  <a href="https://t.me/trangnaria" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-slate-800 hover:border-[#D1E9F6] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                    <i data-lucide="send" class="h-4 w-4"></i>
+                    <span>Telegram</span>
+                  </a>
+                  <!-- Zalo -->
+                  <a href="https://zalo.me/0963711301" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-slate-800 hover:border-[#D1E9F6] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                    <i data-lucide="phone" class="h-4 w-4"></i>
+                    <span>Zalo</span>
+                  </a>
+                  <!-- Messenger -->
+                  <a href="https://m.me/yourpage" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-slate-800 hover:border-[#D1E9F6] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F1D3CE]">
+                    <i data-lucide="message-circle" class="h-4 w-4"></i>
+                    <span>Messenger</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200/80 bg-white/95 shadow-sm p-5 sm:p-6">
+                <form class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-slate-800 mb-1">Họ và tên</label>
+                    <input type="text" class="block w-full rounded-xl border border-slate-300 bg-[#D1E9F6]/40 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#D1E9F6] focus:ring-2 focus:ring-[#D1E9F6]/60 focus:outline-none" placeholder="VD: Nguyễn Thùy Linh">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-800 mb-1">Email</label>
+                    <input type="email" class="block w-full rounded-xl border border-slate-300 bg-[#D1E9F6]/40 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#D1E9F6] focus:ring-2 focus:ring-[#D1E9F6]/60 focus:outline-none" placeholder="you@example.com">
+                  </div>
+                  <div class="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-sm font-medium text-slate-800 mb-1">Loại sự kiện</label>
+                      <input type="text" class="block w-full rounded-xl border border-slate-300 bg-[#D1E9F6]/40 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#D1E9F6] focus:ring-2 focus:ring-[#D1E9F6]/60 focus:outline-none" placeholder="Tiệc cưới, gala, ra mắt, ...">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-slate-800 mb-1">Ngày dự kiến</label>
+                      <input type="date" class="block w-full rounded-xl border border-slate-300 bg-[#D1E9F6]/40 px-3 py-2 text-sm text-slate-900 focus:border-[#D1E9F6] focus:ring-2 focus:ring-[#D1E9F6]/60 focus:outline-none">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-800 mb-1">Địa điểm</label>
+                    <input type="text" class="block w-full rounded-xl border border-slate-300 bg-[#D1E9F6]/40 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#D1E9F6] focus:ring-2 focus:ring-[#D1E9F6]/60 focus:outline-none" placeholder="Tên sảnh / nhà hàng, thành phố">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-800 mb-1">Thông tin thêm</label>
+                    <textarea rows="4" class="block w-full rounded-xl border border-slate-300 bg-[#D1E9F6]/40 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#D1E9F6] focus:ring-2 focus:ring-[#D1E9F6]/60 focus:outline-none" placeholder="Số lượng khách, phong cách mong muốn, yêu cầu đặc biệt..."></textarea>
+                  </div>
+                  <button type="submit" class="w-full inline-flex items-center justify-center rounded-full border border-slate-900/10 bg-slate-900 text-white text-sm font-medium px-4 py-2.5 shadow-sm hover:bg-slate-800 hover:border-slate-900/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#F1D3CE]">
+                    Gửi yêu cầu
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="border-t border-slate-200/80 bg-white/90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-slate-600">
+          <p>© 2025 MC Thùy Trang. Giữ bản quyền nội dung &amp; hình ảnh.</p>
+          <div class="flex items-center gap-4">
+            <a href="#" class="inline-flex items-center gap-1 hover:text-slate-900">
+              <i data-lucide="instagram" class="h-3.5 w-3.5"></i>
+              <span>Instagram</span>
+            </a>
+            <a href="#" class="inline-flex items-center gap-1 hover:text-slate-900">
+              <i data-lucide="facebook" class="h-3.5 w-3.5"></i>
+              <span>Facebook</span>
+            </a>
+            <a href="#" class="inline-flex items-center gap-1 hover:text-slate-900">
+              <i data-lucide="youtube" class="h-3.5 w-3.5"></i>
+              <span>YouTube</span>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const openIcon = document.getElementById('mobile-open');
+        const closeIcon = document.getElementById('mobile-close');
+
+        if (mobileToggle && mobileNav) {
+          mobileToggle.addEventListener('click', () => {
+            const isOpen = !mobileNav.classList.contains('hidden');
+            if (isOpen) {
+              mobileNav.classList.add('hidden');
+              openIcon.classList.remove('hidden');
+              closeIcon.classList.add('hidden');
+            } else {
+              mobileNav.classList.remove('hidden');
+              openIcon.classList.add('hidden');
+              closeIcon.classList.remove('hidden');
+            }
+          });
+
+          mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              mobileNav.classList.add('hidden');
+              openIcon.classList.remove('hidden');
+              closeIcon.classList.add('hidden');
+            });
+          });
         }
 
-        card.style.transform = transform;
-        card.style.opacity = opacity;
-        card.style.zIndex = zIndex;
-      });
-
-      // Update indicators
-      indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentIndex);
-      });
-    }
-
-    // Go to specific slide
-    function goToSlide(index) {
-      currentIndex = index;
-      updateCards();
-    }
-
-    // Next slide
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % images.length;
-      updateCards();
-    }
-
-    // Previous slide
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      updateCards();
-    }
-
-    // Event listeners for navigation
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
-    });
-
-    // Touch/Swipe functionality
-    cardsContainer.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      startX = e.touches[0].clientX;
-    });
-
-    cardsContainer.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      currentX = e.touches[0].clientX;
-    });
-
-    cardsContainer.addEventListener('touchend', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      
-      const diff = startX - currentX;
-      const threshold = 50;
-      
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
+        function isMobile() {
+          return window.innerWidth < 768;
         }
-      }
-    });
 
-    // Mouse drag functionality
-    cardsContainer.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.clientX;
-      cardsContainer.style.cursor = 'grabbing';
-    });
+        /* -------- GALLERY CAROUSEL -------- */
+        const galleryTrack = document.getElementById('gallery-track');
+        const galleryViewport = document.getElementById('gallery-viewport');
+        const galleryPrev = document.getElementById('gallery-prev');
+        const galleryNext = document.getElementById('gallery-next');
+        const galleryDots = document.querySelectorAll('.gallery-dot');
+        const galleryCards = galleryTrack ? Array.from(galleryTrack.children) : [];
+        let galleryIndex = 0;
+        let galleryMaxIndex = 1;
+        let galleryInterval;
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      currentX = e.clientX;
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      cardsContainer.style.cursor = 'grab';
-      
-      const diff = startX - currentX;
-      const threshold = 50;
-      
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-      }
-    });
-
-    // Card click to open lightbox
-    cardsContainer.addEventListener('click', (e) => {
-      if (!isDragging && Math.abs(startX - currentX) < 10) {
-        const card = e.target.closest('.card');
-        if (card) {
-          const cardIndex = Array.from(cardsContainer.children).indexOf(card);
-          openLightbox(cardIndex, 'image');
-        }
-      }
-    });
-
-    // Auto-rotate (optional)
-    let autoRotateInterval;
-    function startAutoRotate() {
-      autoRotateInterval = setInterval(nextSlide, 4000);
-    }
-    function stopAutoRotate() {
-      clearInterval(autoRotateInterval);
-    }
-
-    // Pause auto-rotate on hover
-    cardsContainer.addEventListener('mouseenter', stopAutoRotate);
-    cardsContainer.addEventListener('mouseleave', startAutoRotate);
-
-    // Initialize carousel
-    createCards();
-    startAutoRotate();
-
-    // Resize listener
-    window.addEventListener('resize', () => {
-      updateSizes();
-      updateCards();
-    });
-
-    // Video Carousel
-    const videos = [
-      {
-        src: 'https://www.youtube.com/embed/8kmr9_FXTXQ?si=vpLmBl8mtBWmUAt2',
-        thumbnail: 'https://img.youtube.com/vi/8kmr9_FXTXQ/maxresdefault.jpg',
-        caption: 'Wedding Hosting'
-      },
-      {
-        src: 'https://www.youtube.com/embed/57hfgGDeaYI?si=85Y0r3rJusl4SWd1',
-        thumbnail: 'https://img.youtube.com/vi/57hfgGDeaYI/maxresdefault.jpg',
-        caption: 'Corporate Event'
-      }
-    ];
-
-    const videoCarousel = document.getElementById('video-carousel');
-    function createVideoCarousel() {
-      videoCarousel.innerHTML = '';
-      videos.forEach((video, index) => {
-        const item = document.createElement('div');
-        item.classList.add('video-carousel__item');
-        item.innerHTML = `
-          <img src="${video.thumbnail}" alt="${video.caption}" loading="lazy" />
-          <div class="video-carousel__play"></div>
-          <p class="video-carousel__caption">${video.caption}</p>
-        `;
-        videoCarousel.appendChild(item);
-      });
-    }
-
-    createVideoCarousel();
-
-    // Lightbox for Images and Videos
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxVideo = document.getElementById('lightbox-video');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const close = document.querySelector('.close');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
-
-    let currentLightboxIndex = 0;
-    let currentContentType = 'image';
-
-    function openLightbox(index, type) {
-      currentLightboxIndex = index;
-      currentContentType = type;
-      if (type === 'image') {
-        lightboxImage.src = images[index].src;
-        lightboxImage.style.display = 'block';
-        lightboxVideo.style.display = 'none';
-        lightboxCaption.textContent = images[index].title;
-      } else {
-        lightboxVideo.src = videos[index].src;
-        lightboxImage.style.display = 'none';
-        lightboxVideo.style.display = 'block';
-        lightboxCaption.textContent = videos[index].caption;
-      }
-      lightbox.style.display = 'block';
-      setTimeout(() => lightbox.classList.add('show'), 10);
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('show');
-      setTimeout(() => {
-        lightbox.style.display = 'none';
-        lightboxVideo.src = '';
-      }, 300);
-    }
-
-    function showPrev() {
-      if (currentContentType === 'image') {
-        currentLightboxIndex = (currentLightboxIndex - 1 + images.length) % images.length;
-        lightboxImage.src = images[currentLightboxIndex].src;
-        lightboxCaption.textContent = images[currentLightboxIndex].title;
-      } else {
-        currentLightboxIndex = (currentLightboxIndex - 1 + videos.length) % videos.length;
-        lightboxVideo.src = videos[currentLightboxIndex].src;
-        lightboxCaption.textContent = videos[currentLightboxIndex].caption;
-      }
-    }
-
-    function showNext() {
-      if (currentContentType === 'image') {
-        currentLightboxIndex = (currentLightboxIndex + 1) % images.length;
-        lightboxImage.src = images[currentLightboxIndex].src;
-        lightboxCaption.textContent = images[currentLightboxIndex].title;
-      } else {
-        currentLightboxIndex = (currentLightboxIndex + 1) % videos.length;
-        lightboxVideo.src = videos[currentLightboxIndex].src;
-        lightboxCaption.textContent = videos[currentLightboxIndex].caption;
-      }
-    }
-
-    document.querySelectorAll('.video-carousel__item').forEach((item, index) => {
-      item.addEventListener('click', () => openLightbox(index, 'video'));
-    });
-
-    close.addEventListener('click', closeLightbox);
-    prev.addEventListener('click', showPrev);
-    next.addEventListener('click', showNext);
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // Lightbox keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (lightbox.classList.contains('show')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') showPrev();
-        if (e.key === 'ArrowRight') showNext();
-      }
-    });
-
-    // Interactive Gradient Follow
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
-      document.body.style.background = `
-        linear-gradient(${x * 45 + 45}deg,
-        rgba(42,9,68,0.9) 0%,
-        rgba(0,50,100,0.7) 50%,
-        rgba(255,60,172,0.5) 100%)
-      `;
-    });
-
-    // Scroll Animations using IntersectionObserver
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            entry.target.style.transform = 'translateY(0)';
+        function computeGalleryMaxIndex() {
+          if (!galleryTrack) return;
+          if (isMobile()) {
+            galleryMaxIndex = galleryCards.length - 1;
+          } else {
+            const cardsPerView = 3;
+            galleryMaxIndex = Math.max(0, Math.ceil(galleryCards.length / cardsPerView) - 1);
           }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(
-      '#gallery, #video, #testimonials, #services, #contact'
-    ).forEach((section) => {
-      section.style.opacity = 0;
-      section.style.transform = 'translateY(50px)';
-      observer.observe(section);
-    });
+        }
 
-    // Smooth Scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth',
+        function updateGallery() {
+          if (!galleryTrack || !galleryViewport) return;
+          const viewportWidth = galleryViewport.getBoundingClientRect().width;
+          let offset;
+
+          if (isMobile()) {
+            const cardWidth = galleryCards[0].getBoundingClientRect().width + 20;
+            offset = galleryIndex * cardWidth;
+          } else {
+            offset = galleryIndex * viewportWidth;
+          }
+
+          galleryTrack.style.transform = `translateX(-${offset}px)`;
+
+          galleryDots.forEach((dot, i) => {
+            const active = galleryIndex === 0 ? 0 : 1;
+            dot.classList.toggle('bg-slate-400/70', i === active);
+            dot.classList.toggle('bg-slate-300/70', i !== active);
+          });
+        }
+
+        function nextGallery() {
+          galleryIndex = galleryIndex >= galleryMaxIndex ? 0 : galleryIndex + 1;
+          updateGallery();
+        }
+
+        function startGalleryAutoScroll() {
+          clearInterval(galleryInterval);
+          galleryInterval = setInterval(nextGallery, 5000);
+        }
+
+        if (galleryPrev && galleryNext) {
+          galleryPrev.addEventListener('click', () => {
+            galleryIndex = galleryIndex === 0 ? galleryMaxIndex : galleryIndex - 1;
+            updateGallery();
+            startGalleryAutoScroll();
+          });
+
+          galleryNext.addEventListener('click', () => {
+            nextGallery();
+            startGalleryAutoScroll();
+          });
+        }
+
+        galleryDots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            galleryIndex = i === 0 ? 0 : galleryMaxIndex;
+            updateGallery();
+            startGalleryAutoScroll();
+          });
         });
+
+        /* -------- VIDEO CAROUSEL -------- */
+        const videoTrack = document.getElementById('video-track');
+        const videoViewport = document.getElementById('video-viewport');
+        const videoPrev = document.getElementById('video-prev');
+        const videoNext = document.getElementById('video-next');
+        const videoDots = document.querySelectorAll('.video-dot');
+        const videoCards = videoTrack ? Array.from(videoTrack.children) : [];
+        let videoIndex = 0;
+        let videoMaxIndex = 1;
+        let videoInterval;
+
+        function computeVideoMaxIndex() {
+          if (!videoTrack) return;
+          if (isMobile()) {
+            videoMaxIndex = videoCards.length - 1;
+          } else {
+            const cardsPerView = 2;
+            videoMaxIndex = Math.max(0, Math.ceil(videoCards.length / cardsPerView) - 1);
+          }
+        }
+
+        function updateVideo() {
+          if (!videoTrack || !videoViewport) return;
+          const viewportWidth = videoViewport.getBoundingClientRect().width;
+          let offset;
+
+          if (isMobile()) {
+            const cardWidth = videoCards[0].getBoundingClientRect().width + 24;
+            offset = videoIndex * cardWidth;
+          } else {
+            offset = videoIndex * viewportWidth;
+          }
+
+          videoTrack.style.transform = `translateX(-${offset}px)`;
+
+          videoDots.forEach((dot, i) => {
+            const active = videoIndex === 0 ? 0 : 1;
+            dot.classList.toggle('bg-slate-400/70', i === active);
+            dot.classList.toggle('bg-slate-300/70', i !== active);
+          });
+        }
+
+        function nextVideo() {
+          videoIndex = videoIndex >= videoMaxIndex ? 0 : videoIndex + 1;
+          updateVideo();
+        }
+
+        function startVideoAutoScroll() {
+          clearInterval(videoInterval);
+          videoInterval = setInterval(nextVideo, 6000);
+        }
+
+        if (videoPrev && videoNext) {
+          videoPrev.addEventListener('click', () => {
+            videoIndex = videoIndex === 0 ? videoMaxIndex : videoIndex - 1;
+            updateVideo();
+            startVideoAutoScroll();
+          });
+
+          videoNext.addEventListener('click', () => {
+            nextVideo();
+            startVideoAutoScroll();
+          });
+        }
+
+        videoDots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            videoIndex = i === 0 ? 0 : videoMaxIndex;
+            updateVideo();
+            startVideoAutoScroll();
+          });
+        });
+
+        /* -------- HANDLE RESIZE -------- */
+        function handleResize() {
+          computeGalleryMaxIndex();
+          computeVideoMaxIndex();
+          galleryIndex = Math.min(galleryIndex, galleryMaxIndex);
+          videoIndex = Math.min(videoIndex, videoMaxIndex);
+          updateGallery();
+          updateVideo();
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        // Initial
+        computeGalleryMaxIndex();
+        computeVideoMaxIndex();
+        updateGallery();
+        updateVideo();
+        startGalleryAutoScroll();
+        startVideoAutoScroll();
+
+        // Init lucide icons with correct stroke width
+        if (window.lucide) {
+          lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
+        }
       });
-    });
-
-    // Back to Top Button
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTop.style.display = 'block';
-      } else {
-        backToTop.style.display = 'none';
-      }
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Floating Social Buttons Toggle
-    var mainDiv = document.getElementById('main-button');
-    mainDiv.addEventListener('click', function(){
-      this.children.item(0).classList.toggle('fa-comments');
-      this.children.item(0).classList.toggle('fa-times');
-      this.classList.toggle('open');
-    });
-  </script>
-</body>
-</html>
+    </script>
+  
+</body></html>
