@@ -1,5 +1,5 @@
 // netlify/functions/sync-media.js
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 // Fetch files from Google Drive folder
 async function fetchDriveFiles(folderId, apiKey) {
