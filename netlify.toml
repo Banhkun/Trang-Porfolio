@@ -27,13 +27,6 @@
 [context.branch-deploy]
   # You can add branch-specific settings here if needed
 
-# Redirect rules (if needed)
-[[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-  force = true
-
 # Headers for security and performance
 [[headers]]
   for = "/*"
