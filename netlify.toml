@@ -2,12 +2,11 @@
 # Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
 
 [build]
-  # Directory with your static files
-  publish = "public"
+  # Publish from root directory (where index.html is)
+  publish = "."
 
   # No build command needed for static site
-  # If you add build steps later (e.g., minification), add them here
-  # command = "npm run build"
+  command = ""
 
 [functions]
   # Directory where your serverless functions are stored
