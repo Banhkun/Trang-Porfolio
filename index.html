@@ -95,6 +95,86 @@
       border: 1px solid rgba(255, 107, 157, 0.3);
       color: #8B5CF6;
     }
+
+    /* Image Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 107, 157, 0.8);
+      transform: scale(1.1);
+    }
+
+    /* Mobile carousel controls */
+    @media (max-width: 767px) {
+      .carousel-controls-bottom {
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 20;
+      }
+
+      .carousel-controls-side {
+        display: none;
+      }
+
+      .gallery-card img {
+        cursor: pointer;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .carousel-controls-bottom {
+        display: none;
+      }
+
+      .gallery-card img {
+        cursor: pointer;
+      }
+    }
   </style>
 </head>
 
@@ -268,8 +348,9 @@
               <span class="badge rounded-full px-4 py-2 text-sm font-medium">Gala</span>
             </div>
           </div>
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center -ml-4 z-10">
+          <div class="relative pb-20 md:pb-0">
+            <!-- Desktop side controls -->
+            <div class="carousel-controls-side absolute inset-y-0 left-0 flex items-center -ml-4 z-10">
               <button id="gallery-prev" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -278,7 +359,7 @@
                 </svg>
               </button>
             </div>
-            <div class="absolute inset-y-0 right-0 flex items-center -mr-4 z-10">
+            <div class="carousel-controls-side absolute inset-y-0 right-0 flex items-center -mr-4 z-10">
               <button id="gallery-next" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -287,6 +368,25 @@
                 </svg>
               </button>
             </div>
+
+            <!-- Mobile bottom controls -->
+            <div class="carousel-controls-bottom">
+              <button id="gallery-prev-mobile" type="button"
+                class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+              </button>
+              <button id="gallery-next-mobile" type="button"
+                class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
+              </button>
+            </div>
+
             <div id="gallery-viewport" class="overflow-hidden">
               <div id="gallery-track" class="flex gap-6 transition-transform duration-500 ease-out">
                 <!-- Gallery cards will be dynamically loaded here -->
@@ -311,8 +411,9 @@
             <p class="text-sm text-slate-600 max-w-xs">Showreel đầy đủ và các video khác có thể được gửi qua email hoặc
               chat theo yêu cầu.</p>
           </div>
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center -ml-4 z-10">
+          <div class="relative pb-20 md:pb-0">
+            <!-- Desktop side controls -->
+            <div class="carousel-controls-side absolute inset-y-0 left-0 flex items-center -ml-4 z-10">
               <button id="video-prev" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -321,7 +422,7 @@
                 </svg>
               </button>
             </div>
-            <div class="absolute inset-y-0 right-0 flex items-center -mr-4 z-10">
+            <div class="carousel-controls-side absolute inset-y-0 right-0 flex items-center -mr-4 z-10">
               <button id="video-next" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -330,6 +431,25 @@
                 </svg>
               </button>
             </div>
+
+            <!-- Mobile bottom controls -->
+            <div class="carousel-controls-bottom">
+              <button id="video-prev-mobile" type="button"
+                class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+              </button>
+              <button id="video-next-mobile" type="button"
+                class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
+              </button>
+            </div>
+
             <div id="video-viewport" class="overflow-hidden">
               <div id="video-track" class="flex gap-8 transition-transform duration-500 ease-out">
                 <!-- Video cards will be dynamically loaded here -->
@@ -545,6 +665,17 @@
     </footer>
   </div>
 
+  <!-- Image Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-close" onclick="closeLightbox()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"></path>
+      </svg>
+    </div>
+    <img id="lightbox-img" src="" alt="Zoomed image">
+  </div>
+
   <script>
     // ============================================
     // NETLIFY FUNCTIONS API CALLS
@@ -594,9 +725,14 @@
         const title = image.description || image.name.replace(/\.[^/.]+$/, '');
 
         return `
-          <article class="group glass-card rounded-3xl overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
+          <article class="gallery-card group glass-card rounded-3xl overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
             <div class="relative overflow-hidden">
-              <img src="${imageUrl}" alt="${title}" class="w-full h-64 object-cover transition-transform group-hover:scale-110" loading="lazy" onerror="this.src='${fallbackUrl}';">
+              <img src="${imageUrl}"
+                   alt="${title}"
+                   class="w-full h-64 object-cover transition-transform group-hover:scale-110"
+                   loading="lazy"
+                   onerror="this.src='${fallbackUrl}';"
+                   onclick="openLightbox('${imageUrl}')">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0"></div>
               <div class="absolute bottom-3 left-3 badge rounded-full px-3 py-1.5 text-xs font-semibold text-white bg-black/40 backdrop-blur-sm">Sự kiện ${index + 1}</div>
             </div>
@@ -654,12 +790,37 @@
     }
 
     // ============================================
+    // LIGHTBOX FUNCTIONS
+    // ============================================
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Close lightbox on escape key or background click
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.getElementById('lightbox')?.addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    // ============================================
     // CAROUSEL FUNCTIONS
     // ============================================
     let galleryIndex = 0;
     let videoIndex = 0;
     let galleryInterval;
-    let videoInterval;
 
     function isMobile() {
       return window.innerWidth < 768;
@@ -703,8 +864,13 @@
         }
       }
 
+      // Desktop controls
       document.getElementById('gallery-prev')?.addEventListener('click', () => { prev(); startAuto(); });
       document.getElementById('gallery-next')?.addEventListener('click', () => { next(); startAuto(); });
+
+      // Mobile controls
+      document.getElementById('gallery-prev-mobile')?.addEventListener('click', () => { prev(); startAuto(); });
+      document.getElementById('gallery-next-mobile')?.addEventListener('click', () => { next(); startAuto(); });
 
       update();
       startAuto();
@@ -741,18 +907,17 @@
         update();
       }
 
-      function startAuto() {
-        clearInterval(videoInterval);
-        if (maxIndex > 0) {
-          videoInterval = setInterval(next, 6000);
-        }
-      }
+      // NO AUTO-SCROLL for videos - easier to click play button
 
-      document.getElementById('video-prev')?.addEventListener('click', () => { prev(); startAuto(); });
-      document.getElementById('video-next')?.addEventListener('click', () => { next(); startAuto(); });
+      // Desktop controls
+      document.getElementById('video-prev')?.addEventListener('click', prev);
+      document.getElementById('video-next')?.addEventListener('click', next);
+
+      // Mobile controls
+      document.getElementById('video-prev-mobile')?.addEventListener('click', prev);
+      document.getElementById('video-next-mobile')?.addEventListener('click', next);
 
       update();
-      startAuto();
     }
 
     // ============================================
