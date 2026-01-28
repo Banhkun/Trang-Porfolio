@@ -162,23 +162,21 @@
       }
 
       /* Video carousel - buttons at aspect-video bottom */
-      /* aspect-video on mobile full width ≈ 56.25% of width */
-      /* For a typical mobile width of 375px, video height ≈ 211px */
-      /* We'll use a dynamic calculation or fixed value */
       #video .carousel-controls-side {
-        /* On mobile, aspect-video (16:9) of full width */
-        /* Approximate: width * 0.5625 */
-        /* For safety, using a bit more than typical mobile */
         top: calc(100vw * 0.5625);
         transform: translateY(-50%);
       }
 
+      /* Left button: half outside left border (button is 48px = 3rem wide, so -1.5rem) */
       .carousel-controls-side.left {
-        left: 0;
+        left: -1.5rem;
+        /* Half of 3rem (48px button width) */
       }
 
+      /* Right button: half outside right border */
       .carousel-controls-side.right {
-        right: 0;
+        right: -1.5rem;
+        /* Half of 3rem (48px button width) */
       }
 
       .gallery-card img {
@@ -186,21 +184,23 @@
       }
     }
 
-    /* Desktop: buttons on the sides, vertically centered */
+    /* Desktop: buttons on the sides, vertically centered, half outside */
     @media (min-width: 768px) {
       .carousel-controls-side {
         top: 50%;
         transform: translateY(-50%);
       }
 
+      /* Left button: half outside left border */
       .carousel-controls-side.left {
-        left: -3rem;
-        /* Further outside on desktop */
+        left: -1.5rem;
+        /* Half of 3rem (48px button width) */
       }
 
+      /* Right button: half outside right border */
       .carousel-controls-side.right {
-        right: -3rem;
-        /* Further outside on desktop */
+        right: -1.5rem;
+        /* Half of 3rem (48px button width) */
       }
 
       .gallery-card img {
