@@ -1,0 +1,35 @@
+name: Update Media JSON
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *'  # Every 3 days at midnight UTC
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install node-fetch@2  # For fetch in Node (use v2 for CommonJS)
+
+      - name: Run update script
+        env:
+          GOOGLE_DRIVE_API_KEY: ${{ secrets.GOOGLE_DRIVE_API_KEY }}
+          IMAGES_FOLDER_ID: ${{ secrets.IMAGES_FOLDER_ID }}
+          VIDEOS_FOLDER_ID: ${{ secrets.VIDEOS_FOLDER_ID }}
+        run: node update-media.js
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add media.json
+          git commit -m 'Update media.json from Google Drive' || echo "No changes to commit"
+          git push
