@@ -146,7 +146,7 @@
     }
 
     /* Carousel controls positioning */
-    /* On mobile: position buttons at the dividing line between image and text */
+    /* Mobile: buttons at the dividing line between image and text */
     @media (max-width: 767px) {
       .carousel-section {
         position: relative;
@@ -154,8 +154,8 @@
 
       .carousel-controls-side {
         position: absolute;
-        top: 256px;
-        /* h-64 = 256px (height of image) */
+        /* Position at image height (h-64 = 16rem = 256px) from top of carousel */
+        top: 16rem;
         left: 0;
         right: 0;
         transform: translateY(-50%);
@@ -170,15 +170,26 @@
         pointer-events: auto;
       }
 
-      .gallery-card img,
-      .video-card {
+      .gallery-card img {
         cursor: pointer;
       }
     }
 
+    /* Desktop: buttons on the sides */
     @media (min-width: 768px) {
       .carousel-controls-side {
-        /* Desktop: keep on sides */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 30;
+      }
+
+      .carousel-controls-side.left {
+        left: -1rem;
+      }
+
+      .carousel-controls-side.right {
+        right: -1rem;
       }
 
       .gallery-card img {
@@ -359,8 +370,8 @@
             </div>
           </div>
           <div class="carousel-section relative">
-            <!-- Carousel controls - positioned on sides for desktop, at image/text dividing line on mobile -->
-            <div class="carousel-controls-side absolute inset-y-0 left-0 md:flex items-center md:-ml-4 z-10">
+            <!-- Left button -->
+            <div class="carousel-controls-side left">
               <button id="gallery-prev" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -369,7 +380,9 @@
                 </svg>
               </button>
             </div>
-            <div class="carousel-controls-side absolute inset-y-0 right-0 md:flex items-center md:-mr-4 z-10">
+
+            <!-- Right button -->
+            <div class="carousel-controls-side right">
               <button id="gallery-next" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -404,8 +417,8 @@
               chat theo yêu cầu.</p>
           </div>
           <div class="carousel-section relative">
-            <!-- Carousel controls - positioned on sides for desktop, at video/text dividing line on mobile -->
-            <div class="carousel-controls-side absolute inset-y-0 left-0 md:flex items-center md:-ml-4 z-10">
+            <!-- Left button -->
+            <div class="carousel-controls-side left">
               <button id="video-prev" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -414,7 +427,9 @@
                 </svg>
               </button>
             </div>
-            <div class="carousel-controls-side absolute inset-y-0 right-0 md:flex items-center md:-mr-4 z-10">
+
+            <!-- Right button -->
+            <div class="carousel-controls-side right">
               <button id="video-next" type="button"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
