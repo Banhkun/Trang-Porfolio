@@ -151,20 +151,34 @@
       z-index: 30;
     }
 
-    /* Mobile: buttons at the dividing line between image and text */
+    /* Mobile: buttons at the dividing line between image/video and text */
     @media (max-width: 767px) {
-      .carousel-controls-side {
-        /* Position at image height (h-64 = 16rem = 256px) from top of carousel */
+
+      /* Gallery carousel - buttons at h-64 (256px) */
+      #gallery .carousel-controls-side {
         top: 16rem;
+        /* h-64 = 16rem = 256px */
+        transform: translateY(-50%);
+      }
+
+      /* Video carousel - buttons at aspect-video bottom */
+      /* aspect-video on mobile full width ≈ 56.25% of width */
+      /* For a typical mobile width of 375px, video height ≈ 211px */
+      /* We'll use a dynamic calculation or fixed value */
+      #video .carousel-controls-side {
+        /* On mobile, aspect-video (16:9) of full width */
+        /* Approximate: width * 0.5625 */
+        /* For safety, using a bit more than typical mobile */
+        top: calc(100vw * 0.5625);
         transform: translateY(-50%);
       }
 
       .carousel-controls-side.left {
-        left: 1rem;
+        left: 0;
       }
 
       .carousel-controls-side.right {
-        right: 1rem;
+        right: 0;
       }
 
       .gallery-card img {
@@ -180,11 +194,13 @@
       }
 
       .carousel-controls-side.left {
-        left: -1rem;
+        left: -3rem;
+        /* Further outside on desktop */
       }
 
       .carousel-controls-side.right {
-        right: -1rem;
+        right: -3rem;
+        /* Further outside on desktop */
       }
 
       .gallery-card img {
