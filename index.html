@@ -145,29 +145,26 @@
       transform: scale(1.1);
     }
 
-    /* Carousel controls positioning */
+    /* Carousel controls - shared positioning */
+    .carousel-controls-side {
+      position: absolute;
+      z-index: 30;
+    }
+
     /* Mobile: buttons at the dividing line between image and text */
     @media (max-width: 767px) {
-      .carousel-section {
-        position: relative;
-      }
-
       .carousel-controls-side {
-        position: absolute;
         /* Position at image height (h-64 = 16rem = 256px) from top of carousel */
         top: 16rem;
-        left: 0;
-        right: 0;
         transform: translateY(-50%);
-        display: flex;
-        justify-content: space-between;
-        padding: 0 1rem;
-        z-index: 30;
-        pointer-events: none;
       }
 
-      .carousel-controls-side button {
-        pointer-events: auto;
+      .carousel-controls-side.left {
+        left: 1rem;
+      }
+
+      .carousel-controls-side.right {
+        right: 1rem;
       }
 
       .gallery-card img {
@@ -175,13 +172,11 @@
       }
     }
 
-    /* Desktop: buttons on the sides */
+    /* Desktop: buttons on the sides, vertically centered */
     @media (min-width: 768px) {
       .carousel-controls-side {
-        position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 30;
       }
 
       .carousel-controls-side.left {
