@@ -678,35 +678,22 @@
 
   <script>
     // ============================================
-    // NETLIFY FUNCTIONS API CALLS
+    // LOAD MEDIA FROM STATIC JSON FILE
     // ============================================
-    async function fetchImages() {
+    async function loadMediaData() {
       try {
-        const response = await fetch('/.netlify/functions/get-images');
+        const response = await fetch('/media.json');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('✅ Images fetched:', data.count);
-        return data.files || [];
+        console.log('✅ Media data loaded');
+        console.log(`📊 ${data.images.count} images, ${data.videos.count} videos`);
+        console.log(`🕐 Last updated: ${data.lastUpdated}`);
+        return data;
       } catch (error) {
-        console.error('❌ Error fetching images:', error);
-        return [];
-      }
-    }
-
-    async function fetchVideos() {
-      try {
-        const response = await fetch('/.netlify/functions/get-videos');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('✅ Videos fetched:', data.count);
-        return data.files || [];
-      } catch (error) {
-        console.error('❌ Error fetching videos:', error);
-        return [];
+        console.error('❌ Error loading media data:', error);
+        return { images: { files: [], count: 0 }, videos: { files: [], count: 0 } };
       }
     }
 
@@ -773,13 +760,12 @@
     }
 
     async function loadContent() {
-      console.log('📥 Loading content from Netlify Functions...');
+      console.log('📥 Loading content from media.json...');
 
-      const images = await fetchImages();
-      renderGalleryCards(images);
+      const mediaData = await loadMediaData();
 
-      const videos = await fetchVideos();
-      renderVideoCards(videos);
+      renderGalleryCards(mediaData.images.files);
+      renderVideoCards(mediaData.videos.files);
 
       // Reinitialize carousels after content loads
       setTimeout(() => {
