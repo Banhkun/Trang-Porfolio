@@ -1,0 +1,58 @@
+name: Update Media from Google Drive
+
+on:
+  # Run every 6 hours
+  schedule:
+    - cron: "0 */6 * * *"
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+  # Run on push to main (for initial setup and testing)
+  push:
+    branches:
+      - main
+
+jobs:
+  update-media:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Run update script
+        env:
+          GOOGLE_DRIVE_API_KEY: ${{ secrets.GOOGLE_DRIVE_API_KEY }}
+          IMAGES_FOLDER_ID: ${{ secrets.IMAGES_FOLDER_ID }}
+          VIDEOS_FOLDER_ID: ${{ secrets.VIDEOS_FOLDER_ID }}
+        run: node update-media.js
+
+      - name: Check if media.json changed
+        id: check_changes
+        run: |
+          if git diff --quiet media.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push if changed
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add media.json
+          git commit -m "🤖 Auto-update media.json from Google Drive"
+          git push
+
+      - name: No changes detected
+        if: steps.check_changes.outputs.changed == 'false'
+        run: echo "ℹ️ No changes in media.json - skipping commit"
