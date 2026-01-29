@@ -1,3 +1,19 @@
-"scripts": {
-"build": "node scripts/generate-media.js"
+{
+  "name": "mc-thuytrang-portfolio",
+  "version": "1.0.0",
+  "description": "MC Thùy Trang portfolio website with automated media updates",
+  "main": "update-media.js",
+  "scripts": {
+    "update": "node update-media.js"
+  },
+  "keywords": [
+    "portfolio",
+    "mc",
+    "google-drive"
+  ],
+  "author": "MC Thùy Trang",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
