@@ -3,7 +3,7 @@ name: Update Media from Google Drive
 on:
   # Run every 6 hours
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 3 * * 1"
 
   # Allow manual trigger
   workflow_dispatch:
