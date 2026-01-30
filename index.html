@@ -796,10 +796,11 @@
             <div class="relative overflow-hidden">
               <img src="${imageUrl}"
                    alt="${title}"
-                   class="w-full h-64 object-cover transition-transform group-hover:scale-110"
+                   class="w-full h-64 object-cover transition-transform group-hover:scale-110 cursor-pointer"
                    loading="lazy"
                    onerror="this.src='${fallbackUrl}';"
-                   onclick="openLightbox('${imageUrl}', ${index})">
+                   data-lightbox-index="${index}"
+                   data-lightbox-src="${imageUrl}">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0"></div>
               <div class="absolute bottom-3 left-3 badge rounded-full px-3 py-1.5 text-xs font-semibold text-white bg-black/40 backdrop-blur-sm">Sự kiện ${index + 1}</div>
             </div>
@@ -810,6 +811,11 @@
           </article>
         `;
       }).join('');
+
+      // Add click event listeners to all gallery images after rendering
+      setTimeout(() => {
+        attachLightboxListeners();
+      }, 100);
     }
 
     function renderVideoCards(videos) {
@@ -861,17 +867,34 @@
     let currentLightboxIndex = 0;
     let lightboxImages = [];
 
-    window.openLightbox = function (imageSrc, imageIndex) {
+    function attachLightboxListeners() {
+      // Attach click listeners to all gallery images
+      const galleryImages = document.querySelectorAll('.gallery-card img[data-lightbox-index]');
+
+      galleryImages.forEach(img => {
+        img.addEventListener('click', function () {
+          const index = parseInt(this.getAttribute('data-lightbox-index'));
+          const src = this.getAttribute('data-lightbox-src') || this.src;
+          openLightbox(src, index);
+        });
+      });
+
+      console.log(`✅ Attached lightbox listeners to ${galleryImages.length} images`);
+    }
+
+    function openLightbox(imageSrc, imageIndex) {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightboxImage');
       const counter = document.getElementById('lightboxCounter');
 
       if (lightbox && lightboxImg) {
         // Build array of all gallery images
-        lightboxImages = Array.from(document.querySelectorAll('.gallery-card img')).map(img => ({
-          src: img.src,
+        lightboxImages = Array.from(document.querySelectorAll('.gallery-card img[data-lightbox-index]')).map(img => ({
+          src: img.getAttribute('data-lightbox-src') || img.src,
           alt: img.alt
         }));
+
+        console.log(`📸 Opening lightbox with ${lightboxImages.length} images, starting at index ${imageIndex}`);
 
         // Set current index
         currentLightboxIndex = imageIndex || 0;
@@ -895,7 +918,7 @@
       }
     }
 
-    window.closeLightbox = function () {
+    function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightboxImage');
 
@@ -908,7 +931,7 @@
       }
     }
 
-    window.nextLightboxImage = function () {
+    function nextLightboxImage() {
       if (lightboxImages.length === 0) return;
 
       const lightboxImg = document.getElementById('lightboxImage');
@@ -937,7 +960,7 @@
       }, 300);
     }
 
-    window.prevLightboxImage = function () {
+    function prevLightboxImage() {
       if (lightboxImages.length === 0) return;
 
       const lightboxImg = document.getElementById('lightboxImage');
@@ -971,11 +994,11 @@
       const lightbox = document.getElementById('lightbox');
       if (lightbox && lightbox.classList.contains('visible')) {
         if (e.key === 'Escape') {
-          window.closeLightbox();
+          closeLightbox();
         } else if (e.key === 'ArrowRight') {
-          window.nextLightboxImage();
+          nextLightboxImage();
         } else if (e.key === 'ArrowLeft') {
-          window.prevLightboxImage();
+          prevLightboxImage();
         }
       }
     });
@@ -1184,21 +1207,21 @@
         // Click background to close
         lightbox.addEventListener('click', (e) => {
           if (e.target.id === 'lightbox') {
-            window.closeLightbox();
+            closeLightbox();
           }
         });
       }
 
       if (lightboxClose) {
-        lightboxClose.addEventListener('click', window.closeLightbox);
+        lightboxClose.addEventListener('click', closeLightbox);
       }
 
       if (lightboxPrev) {
-        lightboxPrev.addEventListener('click', window.prevLightboxImage);
+        lightboxPrev.addEventListener('click', prevLightboxImage);
       }
 
       if (lightboxNext) {
-        lightboxNext.addEventListener('click', window.nextLightboxImage);
+        lightboxNext.addEventListener('click', nextLightboxImage);
       }
 
       // Reinitialize carousels on resize
