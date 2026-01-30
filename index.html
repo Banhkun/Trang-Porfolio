@@ -112,7 +112,7 @@
       transition: opacity 0.3s ease;
     }
 
-    .lightbox.active {
+    .lightbox.visible {
       display: flex;
       opacity: 1;
     }
@@ -121,28 +121,110 @@
       max-width: 90%;
       max-height: 90%;
       object-fit: contain;
-      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
+    .lightbox img[style*="opacity: 1"] {
+      opacity: 1;
+    }
+
+    /* Lightbox Close Button */
     .lightbox-close {
       position: absolute;
       top: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      right: 30px;
+      font-size: 50px;
+      color: white;
       cursor: pointer;
+      font-weight: 300;
+      line-height: 1;
+      z-index: 10000;
       transition: all 0.3s ease;
+      user-select: none;
     }
 
     .lightbox-close:hover {
-      background: rgba(255, 107, 157, 0.8);
+      color: #FF6B9D;
       transform: scale(1.1);
+    }
+
+    /* Lightbox Navigation Arrows */
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 80px;
+      color: white;
+      cursor: pointer;
+      font-weight: 300;
+      line-height: 1;
+      padding: 20px;
+      user-select: none;
+      transition: all 0.3s ease;
+      z-index: 10000;
+    }
+
+    .lightbox-arrow:hover {
+      color: #FF6B9D;
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    .lightbox-arrow-left {
+      left: 20px;
+    }
+
+    .lightbox-arrow-right {
+      right: 20px;
+    }
+
+    /* Lightbox Counter */
+    .lightbox-counter {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 18px;
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+    }
+
+    /* Mobile responsiveness for lightbox */
+    @media (max-width: 767px) {
+      .lightbox-close {
+        font-size: 40px;
+        top: 15px;
+        right: 20px;
+      }
+
+      .lightbox-arrow {
+        font-size: 50px;
+        padding: 10px;
+      }
+
+      .lightbox-arrow-left {
+        left: 10px;
+      }
+
+      .lightbox-arrow-right {
+        right: 10px;
+      }
+
+      .lightbox-counter {
+        font-size: 14px;
+        bottom: 20px;
+        padding: 8px 16px;
+      }
+
+      .lightbox img {
+        max-width: 95%;
+        max-height: 85%;
+      }
     }
 
     /* Carousel controls - shared positioning */
@@ -667,13 +749,11 @@
 
   <!-- Image Lightbox -->
   <div id="lightbox" class="lightbox">
-    <div class="lightbox-close" onclick="closeLightbox()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2">
-        <path d="M18 6L6 18M6 6l12 12"></path>
-      </svg>
-    </div>
-    <img id="lightbox-img" src="" alt="Zoomed image">
+    <span id="lightboxClose" class="lightbox-close">×</span>
+    <div id="lightboxPrev" class="lightbox-arrow lightbox-arrow-left">‹</div>
+    <img id="lightboxImage" src="" alt="Full size view">
+    <div id="lightboxNext" class="lightbox-arrow lightbox-arrow-right">›</div>
+    <div id="lightboxCounter" class="lightbox-counter"></div>
   </div>
 
   <script>
@@ -719,7 +799,7 @@
                    class="w-full h-64 object-cover transition-transform group-hover:scale-110"
                    loading="lazy"
                    onerror="this.src='${fallbackUrl}';"
-                   onclick="openLightbox('${imageUrl}')">
+                   onclick="openLightbox('${imageUrl}', ${index})">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0"></div>
               <div class="absolute bottom-3 left-3 badge rounded-full px-3 py-1.5 text-xs font-semibold text-white bg-black/40 backdrop-blur-sm">Sự kiện ${index + 1}</div>
             </div>
@@ -778,28 +858,125 @@
     // ============================================
     // LIGHTBOX FUNCTIONS
     // ============================================
-    window.openLightbox = function (imageSrc) {
+    let currentLightboxIndex = 0;
+    let lightboxImages = [];
+
+    window.openLightbox = function (imageSrc, imageIndex) {
       const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxImg = document.getElementById('lightboxImage');
+      const counter = document.getElementById('lightboxCounter');
+
       if (lightbox && lightboxImg) {
-        lightboxImg.src = imageSrc;
-        lightbox.classList.add('active');
+        // Build array of all gallery images
+        lightboxImages = Array.from(document.querySelectorAll('.gallery-card img')).map(img => ({
+          src: img.src,
+          alt: img.alt
+        }));
+
+        // Set current index
+        currentLightboxIndex = imageIndex || 0;
+
+        // Show lightbox
+        lightboxImg.style.opacity = '0';
+        lightbox.classList.add('visible');
         document.body.style.overflow = 'hidden';
+
+        // Load image
+        setTimeout(() => {
+          lightboxImg.src = lightboxImages[currentLightboxIndex].src;
+          lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
+          lightboxImg.style.opacity = '1';
+
+          // Update counter
+          if (counter) {
+            counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+          }
+        }, 50);
       }
     }
 
     window.closeLightbox = function () {
       const lightbox = document.getElementById('lightbox');
-      if (lightbox) {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
+      const lightboxImg = document.getElementById('lightboxImage');
+
+      if (lightbox && lightboxImg) {
+        lightboxImg.style.opacity = '0';
+        setTimeout(() => {
+          lightbox.classList.remove('visible');
+          document.body.style.overflow = '';
+        }, 300);
       }
     }
 
-    // Close lightbox on escape key
+    window.nextLightboxImage = function () {
+      if (lightboxImages.length === 0) return;
+
+      const lightboxImg = document.getElementById('lightboxImage');
+      const counter = document.getElementById('lightboxCounter');
+
+      // Fade out
+      lightboxImg.style.opacity = '0';
+
+      setTimeout(() => {
+        // Move to next image (loop to start if at end)
+        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxImages.length;
+
+        // Load new image
+        lightboxImg.src = lightboxImages[currentLightboxIndex].src;
+        lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
+
+        // Update counter
+        if (counter) {
+          counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+        }
+
+        // Fade in
+        setTimeout(() => {
+          lightboxImg.style.opacity = '1';
+        }, 50);
+      }, 300);
+    }
+
+    window.prevLightboxImage = function () {
+      if (lightboxImages.length === 0) return;
+
+      const lightboxImg = document.getElementById('lightboxImage');
+      const counter = document.getElementById('lightboxCounter');
+
+      // Fade out
+      lightboxImg.style.opacity = '0';
+
+      setTimeout(() => {
+        // Move to previous image (loop to end if at start)
+        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+
+        // Load new image
+        lightboxImg.src = lightboxImages[currentLightboxIndex].src;
+        lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
+
+        // Update counter
+        if (counter) {
+          counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+        }
+
+        // Fade in
+        setTimeout(() => {
+          lightboxImg.style.opacity = '1';
+        }, 50);
+      }, 300);
+    }
+
+    // Keyboard navigation for lightbox
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        window.closeLightbox();
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox && lightbox.classList.contains('visible')) {
+        if (e.key === 'Escape') {
+          window.closeLightbox();
+        } else if (e.key === 'ArrowRight') {
+          window.nextLightboxImage();
+        } else if (e.key === 'ArrowLeft') {
+          window.prevLightboxImage();
+        }
       }
     });
 
@@ -997,14 +1174,31 @@
       initMobileMenu();
       loadContent();
 
-      // Setup lightbox background click to close
+      // Setup lightbox controls
       const lightbox = document.getElementById('lightbox');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxPrev = document.getElementById('lightboxPrev');
+      const lightboxNext = document.getElementById('lightboxNext');
+
       if (lightbox) {
+        // Click background to close
         lightbox.addEventListener('click', (e) => {
           if (e.target.id === 'lightbox') {
             window.closeLightbox();
           }
         });
+      }
+
+      if (lightboxClose) {
+        lightboxClose.addEventListener('click', window.closeLightbox);
+      }
+
+      if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', window.prevLightboxImage);
+      }
+
+      if (lightboxNext) {
+        lightboxNext.addEventListener('click', window.nextLightboxImage);
       }
 
       // Reinitialize carousels on resize
