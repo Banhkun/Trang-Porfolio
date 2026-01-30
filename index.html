@@ -260,10 +260,6 @@
         right: -1.5rem;
         /* Half of 3rem (48px button width) */
       }
-
-      .gallery-card img {
-        cursor: pointer;
-      }
     }
 
     /* Desktop: buttons on the sides, vertically centered, half outside */
@@ -284,10 +280,12 @@
         right: -1.5rem;
         /* Half of 3rem (48px button width) */
       }
+    }
 
-      .gallery-card img {
-        cursor: pointer;
-      }
+    /* Ensure gallery images are clickable */
+    .gallery-card img {
+      cursor: pointer !important;
+      user-select: none;
     }
   </style>
 </head>
@@ -793,16 +791,16 @@
 
         return `
           <article class="gallery-card group glass-card rounded-3xl overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
-            <div class="relative overflow-hidden">
+            <div class="relative overflow-hidden cursor-pointer" data-lightbox-trigger="${index}">
               <img src="${imageUrl}"
                    alt="${title}"
-                   class="w-full h-64 object-cover transition-transform group-hover:scale-110 cursor-pointer"
+                   class="w-full h-64 object-cover transition-transform group-hover:scale-110"
                    loading="lazy"
                    onerror="this.src='${fallbackUrl}';"
                    data-lightbox-index="${index}"
                    data-lightbox-src="${imageUrl}">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0"></div>
-              <div class="absolute bottom-3 left-3 badge rounded-full px-3 py-1.5 text-xs font-semibold text-white bg-black/40 backdrop-blur-sm">Sự kiện ${index + 1}</div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none"></div>
+              <div class="absolute bottom-3 left-3 badge rounded-full px-3 py-1.5 text-xs font-semibold text-white bg-black/40 backdrop-blur-sm pointer-events-none">Sự kiện ${index + 1}</div>
             </div>
             <div class="p-5 space-y-2">
               <h3 class="text-base font-bold text-slate-900">${title}</h3>
@@ -813,9 +811,10 @@
       }).join('');
 
       // Add click event listeners to all gallery images after rendering
+      // Use longer timeout to ensure DOM is fully ready
       setTimeout(() => {
         attachLightboxListeners();
-      }, 100);
+      }, 500);
     }
 
     function renderVideoCards(videos) {
@@ -868,18 +867,44 @@
     let lightboxImages = [];
 
     function attachLightboxListeners() {
-      // Attach click listeners to all gallery images
+      // Attach click listeners to all gallery images AND their containers
       const galleryImages = document.querySelectorAll('.gallery-card img[data-lightbox-index]');
+      const imageContainers = document.querySelectorAll('[data-lightbox-trigger]');
 
-      galleryImages.forEach(img => {
-        img.addEventListener('click', function () {
+      console.log(`🔍 Found ${galleryImages.length} gallery images and ${imageContainers.length} containers`);
+
+      // Attach to images
+      galleryImages.forEach((img, idx) => {
+        img.style.cursor = 'pointer';
+
+        img.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
           const index = parseInt(this.getAttribute('data-lightbox-index'));
           const src = this.getAttribute('data-lightbox-src') || this.src;
+
+          console.log(`🖱️ Image clicked! Index: ${index}`);
           openLightbox(src, index);
         });
       });
 
-      console.log(`✅ Attached lightbox listeners to ${galleryImages.length} images`);
+      // Also attach to containers for better clickability
+      imageContainers.forEach((container, idx) => {
+        container.addEventListener('click', function (e) {
+          // Only trigger if clicking the container itself, not a child element that already has a handler
+          const index = parseInt(this.getAttribute('data-lightbox-trigger'));
+          const img = this.querySelector('img[data-lightbox-index]');
+
+          if (img) {
+            const src = img.getAttribute('data-lightbox-src') || img.src;
+            console.log(`🖱️ Container clicked! Index: ${index}`);
+            openLightbox(src, index);
+          }
+        });
+      });
+
+      console.log(`✅ Attached lightbox listeners to ${galleryImages.length} images + ${imageContainers.length} containers`);
     }
 
     function openLightbox(imageSrc, imageIndex) {
