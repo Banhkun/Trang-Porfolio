@@ -11,11 +11,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://mcthuytrang.com/">
+  
+  <!-- Preconnect to external domains for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
+  <link rel="preconnect" href="https://drive.google.com">
+  
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap"
     rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <style>
     :root {
       --primary: #FF6B9D;
@@ -122,7 +129,7 @@
       max-height: 90%;
       object-fit: contain;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease, filter 0.3s ease;
     }
 
     .lightbox img[style*="opacity: 1"] {
@@ -235,11 +242,9 @@
 
     /* Mobile: buttons at the dividing line between image/video and text */
     @media (max-width: 767px) {
-
       /* Gallery carousel - buttons at h-64 (256px) */
       #gallery .carousel-controls-side {
-        top: 16rem;
-        /* h-64 = 16rem = 256px */
+        top: 16rem; /* h-64 = 16rem = 256px */
         transform: translateY(-50%);
       }
 
@@ -251,14 +256,12 @@
 
       /* Left button: half outside left border (button is 48px = 3rem wide, so -1.5rem) */
       .carousel-controls-side.left {
-        left: -1.5rem;
-        /* Half of 3rem (48px button width) */
+        left: -1.5rem; /* Half of 3rem (48px button width) */
       }
 
       /* Right button: half outside right border */
       .carousel-controls-side.right {
-        right: -1.5rem;
-        /* Half of 3rem (48px button width) */
+        right: -1.5rem; /* Half of 3rem (48px button width) */
       }
     }
 
@@ -271,17 +274,15 @@
 
       /* Left button: half outside left border */
       .carousel-controls-side.left {
-        left: -1.5rem;
-        /* Half of 3rem (48px button width) */
+        left: -1.5rem; /* Half of 3rem (48px button width) */
       }
 
       /* Right button: half outside right border */
       .carousel-controls-side.right {
-        right: -1.5rem;
-        /* Half of 3rem (48px button width) */
+        right: -1.5rem; /* Half of 3rem (48px button width) */
       }
     }
-
+    
     /* Lightbox Video Container */
     .lightbox-video-container {
       width: 90%;
@@ -304,7 +305,7 @@
     .contact-fab {
       position: fixed;
       bottom: 30px;
-      right: 30px;
+      left: 30px;
       z-index: 9998;
     }
 
@@ -337,7 +338,7 @@
     .contact-fab-menu {
       position: absolute;
       bottom: 75px;
-      right: 0;
+      left: 0;
       background: white;
       border-radius: 16px;
       padding: 8px;
@@ -382,7 +383,7 @@
     @media (max-width: 767px) {
       .contact-fab {
         bottom: 20px;
-        right: 20px;
+        left: 20px;
       }
 
       .contact-fab-button {
@@ -529,8 +530,14 @@
                 <div class="relative glass-card rounded-3xl overflow-hidden shadow-2xl">
                   <div class="aspect-[4/5] overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=80"
-                      alt="MC trên sân khấu" class="w-full h-full object-cover">
+                      src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=75"
+                      srcset="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=400&q=75 400w,
+                              https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=75 600w,
+                              https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=75 900w"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      alt="MC trên sân khấu" 
+                      class="w-full h-full object-cover"
+                      fetchpriority="high">
                   </div>
                   <div class="p-5 space-y-3 bg-gradient-to-br from-white via-white to-[#FFB3D9]/10">
                     <div class="flex items-center justify-between gap-3">
@@ -581,26 +588,26 @@
           <div class="carousel-section relative">
             <!-- Left button -->
             <div class="carousel-controls-side left">
-              <button id="gallery-prev" type="button"
+              <button id="gallery-prev" type="button" aria-label="Previous image"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
+                  stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M15 18l-6-6 6-6"></path>
                 </svg>
               </button>
             </div>
-
+            
             <!-- Right button -->
             <div class="carousel-controls-side right">
-              <button id="gallery-next" type="button"
+              <button id="gallery-next" type="button" aria-label="Next image"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#FF6B9D] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
+                  stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M9 18l6-6-6-6"></path>
                 </svg>
               </button>
             </div>
-
+            
             <div id="gallery-viewport" class="overflow-hidden">
               <div id="gallery-track" class="flex gap-6 transition-transform duration-500 ease-out">
                 <!-- Gallery cards will be dynamically loaded here -->
@@ -628,26 +635,26 @@
           <div class="carousel-section relative">
             <!-- Left button -->
             <div class="carousel-controls-side left">
-              <button id="video-prev" type="button"
+              <button id="video-prev" type="button" aria-label="Previous video"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
+                  stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M15 18l-6-6 6-6"></path>
                 </svg>
               </button>
             </div>
-
+            
             <!-- Right button -->
             <div class="carousel-controls-side right">
-              <button id="video-next" type="button"
+              <button id="video-next" type="button" aria-label="Next video"
                 class="inline-flex items-center justify-center rounded-full bg-white shadow-xl h-12 w-12 text-slate-700 hover:bg-[#8B5CF6] hover:text-white transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
+                  stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M9 18l6-6-6-6"></path>
                 </svg>
               </button>
             </div>
-
+            
             <div id="video-viewport" class="overflow-hidden">
               <div id="video-track" class="flex gap-8 transition-transform duration-500 ease-out">
                 <!-- Video cards will be dynamically loaded here -->
@@ -779,7 +786,7 @@
                 </div>
               </div>
               <div class="flex flex-wrap gap-3">
-                <a href="mailto:mcvothuytrang@gmail.com" target="_blank"
+                <a href="mailto:booking@mcthuytrang.com" target="_blank"
                   class="inline-flex items-center gap-2 glass-card rounded-full px-5 py-3 text-sm font-medium text-slate-800 hover:shadow-lg transition-all">
                   <i data-lucide="mail" class="h-4 w-4 text-[#FF6B9D]"></i><span>Email</span>
                 </a>
@@ -787,11 +794,11 @@
                   class="inline-flex items-center gap-2 glass-card rounded-full px-5 py-3 text-sm font-medium text-slate-800 hover:shadow-lg transition-all">
                   <i data-lucide="send" class="h-4 w-4 text-[#8B5CF6]"></i><span>Telegram</span>
                 </a>
-                <a href="https://zalo.me/0815284047" target="_blank"
+                <a href="https://zalo.me/0963711301" target="_blank"
                   class="inline-flex items-center gap-2 glass-card rounded-full px-5 py-3 text-sm font-medium text-slate-800 hover:shadow-lg transition-all">
                   <i data-lucide="phone" class="h-4 w-4 text-[#FFA500]"></i><span>Zalo</span>
                 </a>
-                <a href="https://m.me/mcvothuytrang" target="_blank"
+                <a href="https://m.me/yourpage" target="_blank"
                   class="inline-flex items-center gap-2 glass-card rounded-full px-5 py-3 text-sm font-medium text-slate-800 hover:shadow-lg transition-all">
                   <i data-lucide="message-circle" class="h-4 w-4 text-[#FF6B9D]"></i><span>Messenger</span>
                 </a>
@@ -819,8 +826,8 @@
                       placeholder="Tiệc cưới, gala...">
                   </div>
                   <div>
-                    <label class="block text-sm font-semibold text-slate-800 mb-2">Ngày dự kiến</label>
-                    <input type="date"
+                    <label for="event-date" class="block text-sm font-semibold text-slate-800 mb-2">Ngày dự kiến</label>
+                    <input type="date" id="event-date"
                       class="block w-full rounded-2xl border border-slate-200 bg-white/50 px-4 py-3 text-sm text-slate-900 focus:border-[#FF6B9D] focus:ring-2 focus:ring-[#FF6B9D]/20 focus:outline-none transition-all">
                   </div>
                 </div>
@@ -867,34 +874,31 @@
   <div id="lightbox" class="lightbox">
     <span id="lightboxClose" class="lightbox-close">×</span>
     <div id="lightboxPrev" class="lightbox-arrow lightbox-arrow-left">‹</div>
-
+    
     <!-- Image container -->
     <img id="lightboxImage" src="" alt="Full size view" style="display: none;">
-
+    
     <!-- Video container -->
     <div id="lightboxVideo" class="lightbox-video-container" style="display: none;">
       <iframe id="lightboxVideoFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
-
+    
     <div id="lightboxNext" class="lightbox-arrow lightbox-arrow-right">›</div>
     <div id="lightboxCounter" class="lightbox-counter"></div>
   </div>
 
   <!-- Floating Contact Menu (Bottom Left) -->
   <div id="contactFab" class="contact-fab">
-    <button id="contactFabButton" class="contact-fab-button">
-      <svg id="contactFabIcon" class="contact-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2">
-        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-        </path>
+    <button id="contactFabButton" class="contact-fab-button" aria-label="Open contact menu">
+      <svg id="contactFabIcon" class="contact-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
       </svg>
-      <svg id="contactFabClose" class="contact-fab-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2">
+      <svg id="contactFabClose" class="contact-fab-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M18 6L6 18M6 6l12 12"></path>
       </svg>
     </button>
-    <div id="contactFabMenu" class="contact-fab-menu">
-      <a href="mailto:mcvothuytrang@gmail.com" class="contact-fab-item">
+    <div id="contactFabMenu" class="contact-fab-menu" role="menu">
+      <a href="mailto:booking@mcthuytrang.com" class="contact-fab-item">
         <i data-lucide="mail" class="w-5 h-5"></i>
         <span>Email</span>
       </a>
@@ -902,11 +906,11 @@
         <i data-lucide="send" class="w-5 h-5"></i>
         <span>Telegram</span>
       </a>
-      <a href="https://zalo.me/0815284047" target="_blank" class="contact-fab-item">
+      <a href="https://zalo.me/0963711301" target="_blank" class="contact-fab-item">
         <i data-lucide="phone" class="w-5 h-5"></i>
         <span>Zalo</span>
       </a>
-      <a href="https://m.me/mcvothuytrang" target="_blank" class="contact-fab-item">
+      <a href="https://m.me/yourpage" target="_blank" class="contact-fab-item">
         <i data-lucide="message-circle" class="w-5 h-5"></i>
         <span>Messenger</span>
       </a>
@@ -944,20 +948,30 @@
       }
 
       galleryTrack.innerHTML = images.map((image, index) => {
-        const imageUrl = `https://lh3.googleusercontent.com/d/${image.id}`;
-        const fallbackUrl = `https://drive.google.com/thumbnail?id=${image.id}&sz=w1000`;
+        const imageId = image.id;
+        
+        // Thumbnail URLs (small, for carousel display)
+        const thumbnailUrl = `https://lh3.googleusercontent.com/d/${imageId}=w400-h300-c`; // Cropped thumbnail
+        const thumbnail600 = `https://lh3.googleusercontent.com/d/${imageId}=w600`;
+        const fallbackUrl = `https://drive.google.com/thumbnail?id=${imageId}&sz=w400`;
+        
+        // Full resolution URL (for lightbox)
+        const fullResUrl = `https://lh3.googleusercontent.com/d/${imageId}=s0`; // s0 = original size
+        
         const title = image.description || image.name.replace(/\.[^/.]+$/, '');
 
         return `
           <article class="gallery-card group glass-card rounded-3xl overflow-hidden flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
             <div class="relative overflow-hidden cursor-pointer" data-lightbox-trigger="${index}">
-              <img src="${imageUrl}"
-                   alt="${title}"
-                   class="w-full h-64 object-cover transition-transform group-hover:scale-110"
-                   loading="lazy"
+              <img src="${thumbnailUrl}" 
+                   srcset="${thumbnailUrl} 400w, ${thumbnail600} 600w"
+                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                   alt="${title}" 
+                   class="w-full h-64 object-cover transition-transform group-hover:scale-110" 
+                   loading="lazy" 
                    onerror="this.src='${fallbackUrl}';"
                    data-lightbox-index="${index}"
-                   data-lightbox-src="${imageUrl}">
+                   data-lightbox-src="${fullResUrl}">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none"></div>
               <div class="absolute bottom-3 left-3 badge rounded-full px-3 py-1.5 text-xs font-semibold text-white bg-black/40 backdrop-blur-sm pointer-events-none">Sự kiện ${index + 1}</div>
             </div>
@@ -968,7 +982,7 @@
           </article>
         `;
       }).join('');
-
+      
       // Add click event listeners to all gallery images after rendering
       // Use longer timeout to ensure DOM is fully ready
       setTimeout(() => {
@@ -992,13 +1006,13 @@
 
         return `
           <div class="video-card group glass-card rounded-3xl overflow-hidden flex-shrink-0 w-full md:w-1/2 hover:shadow-2xl">
-            <div class="relative aspect-video bg-slate-200 cursor-pointer"
+            <div class="relative aspect-video bg-slate-200 cursor-pointer" 
                  data-video-lightbox-trigger="${index}"
                  data-video-id="${video.id}"
                  data-video-url="${videoEmbedUrl}"
                  data-video-title="${title}">
-              <img src="${videoThumbnail}"
-                   alt="${title}"
+              <img src="${videoThumbnail}" 
+                   alt="${title}" 
                    class="w-full h-full object-cover"
                    loading="lazy">
               <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-all">
@@ -1016,7 +1030,7 @@
           </div>
         `;
       }).join('');
-
+      
       // Add click event listeners to all video cards after rendering
       setTimeout(() => {
         attachVideoLightboxListeners();
@@ -1027,7 +1041,7 @@
       console.log('📥 Loading content from media.json...');
 
       const mediaData = await loadMediaData();
-
+      
       renderGalleryCards(mediaData.images.files);
       renderVideoCards(mediaData.videos.files);
 
@@ -1050,31 +1064,31 @@
       // Attach click listeners to all gallery images AND their containers
       const galleryImages = document.querySelectorAll('.gallery-card img[data-lightbox-index]');
       const imageContainers = document.querySelectorAll('[data-lightbox-trigger]');
-
+      
       console.log(`🔍 Found ${galleryImages.length} gallery images and ${imageContainers.length} containers`);
-
+      
       // Attach to images
       galleryImages.forEach((img, idx) => {
         img.style.cursor = 'pointer';
-
-        img.addEventListener('click', function (e) {
+        
+        img.addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
-
+          
           const index = parseInt(this.getAttribute('data-lightbox-index'));
           const src = this.getAttribute('data-lightbox-src') || this.src;
-
+          
           console.log(`🖱️ Image clicked! Index: ${index}`);
           openLightbox(src, index, 'image');
         });
       });
-
+      
       // Also attach to containers for better clickability
       imageContainers.forEach((container, idx) => {
-        container.addEventListener('click', function (e) {
+        container.addEventListener('click', function(e) {
           const index = parseInt(this.getAttribute('data-lightbox-trigger'));
           const img = this.querySelector('img[data-lightbox-index]');
-
+          
           if (img) {
             const src = img.getAttribute('data-lightbox-src') || img.src;
             console.log(`🖱️ Container clicked! Index: ${index}`);
@@ -1082,30 +1096,30 @@
           }
         });
       });
-
+      
       console.log(`✅ Attached lightbox listeners to ${galleryImages.length} images + ${imageContainers.length} containers`);
     }
 
     function attachVideoLightboxListeners() {
       const videoCards = document.querySelectorAll('[data-video-lightbox-trigger]');
-
+      
       console.log(`🔍 Found ${videoCards.length} video cards`);
-
+      
       videoCards.forEach((card, idx) => {
-        card.addEventListener('click', function (e) {
+        card.addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
-
+          
           const index = parseInt(this.getAttribute('data-video-lightbox-trigger'));
           const videoUrl = this.getAttribute('data-video-url');
           const videoId = this.getAttribute('data-video-id');
           const title = this.getAttribute('data-video-title');
-
+          
           console.log(`🖱️ Video card clicked! Index: ${index}`);
           openLightbox(videoUrl, index, 'video');
         });
       });
-
+      
       console.log(`✅ Attached lightbox listeners to ${videoCards.length} videos`);
     }
 
@@ -1115,15 +1129,16 @@
       const lightboxVideo = document.getElementById('lightboxVideo');
       const lightboxVideoFrame = document.getElementById('lightboxVideoFrame');
       const counter = document.getElementById('lightboxCounter');
-
+      
       if (!lightbox) return;
-
+      
       lightboxType = type;
-
+      
       // Build array of all items based on type
       if (type === 'image') {
         lightboxImages = Array.from(document.querySelectorAll('.gallery-card img[data-lightbox-index]')).map(img => ({
           src: img.getAttribute('data-lightbox-src') || img.src,
+          thumbnail: img.src, // Low-res thumbnail for instant preview
           alt: img.alt,
           type: 'image'
         }));
@@ -1134,32 +1149,44 @@
           type: 'video'
         }));
       }
-
+      
       console.log(`📸 Opening lightbox (${type}) with ${lightboxImages.length} items, starting at index ${index}`);
-
+      
       currentLightboxIndex = index || 0;
-
+      
       // Show lightbox
       lightbox.classList.add('visible');
       document.body.style.overflow = 'hidden';
-
+      
       // Show appropriate content
       if (type === 'image') {
         lightboxImg.style.display = 'block';
-        lightboxImg.style.opacity = '0';
         lightboxVideo.style.display = 'none';
-
-        setTimeout(() => {
-          lightboxImg.src = lightboxImages[currentLightboxIndex].src;
-          lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
-          lightboxImg.style.opacity = '1';
-        }, 50);
+        
+        // Progressive loading: Show thumbnail immediately, then load full res
+        const currentImage = lightboxImages[currentLightboxIndex];
+        
+        // Step 1: Show low-res thumbnail instantly (blur effect)
+        lightboxImg.src = currentImage.thumbnail;
+        lightboxImg.style.filter = 'blur(10px)';
+        lightboxImg.style.opacity = '1';
+        
+        // Step 2: Load full resolution in background
+        const fullResImg = new Image();
+        fullResImg.src = currentImage.src;
+        fullResImg.onload = () => {
+          // Once loaded, swap to full resolution with smooth transition
+          lightboxImg.style.filter = 'blur(0px)';
+          lightboxImg.src = currentImage.src;
+          console.log('✅ Full resolution image loaded');
+        };
+        
       } else {
         lightboxImg.style.display = 'none';
         lightboxVideo.style.display = 'flex';
         lightboxVideoFrame.src = lightboxImages[currentLightboxIndex].src + '?autoplay=1';
       }
-
+      
       // Update counter
       if (counter) {
         counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
@@ -1171,15 +1198,15 @@
       const lightboxImg = document.getElementById('lightboxImage');
       const lightboxVideo = document.getElementById('lightboxVideo');
       const lightboxVideoFrame = document.getElementById('lightboxVideoFrame');
-
+      
       if (lightbox) {
         if (lightboxImg) lightboxImg.style.opacity = '0';
-
+        
         // Stop video playback
         if (lightboxVideoFrame) {
           lightboxVideoFrame.src = '';
         }
-
+        
         setTimeout(() => {
           lightbox.classList.remove('visible');
           document.body.style.overflow = '';
@@ -1191,70 +1218,78 @@
 
     function nextLightboxImage() {
       if (lightboxImages.length === 0) return;
-
+      
       const lightboxImg = document.getElementById('lightboxImage');
       const lightboxVideoFrame = document.getElementById('lightboxVideoFrame');
       const counter = document.getElementById('lightboxCounter');
-
-      // Fade out or stop video
+      
+      // Move to next item
+      currentLightboxIndex = (currentLightboxIndex + 1) % lightboxImages.length;
+      
       if (lightboxType === 'image') {
-        lightboxImg.style.opacity = '0';
+        const currentImage = lightboxImages[currentLightboxIndex];
+        
+        // Show thumbnail with blur
+        lightboxImg.src = currentImage.thumbnail;
+        lightboxImg.style.filter = 'blur(10px)';
+        
+        // Load full res
+        const fullResImg = new Image();
+        fullResImg.src = currentImage.src;
+        fullResImg.onload = () => {
+          lightboxImg.style.filter = 'blur(0px)';
+          lightboxImg.src = currentImage.src;
+          lightboxImg.alt = currentImage.alt;
+        };
       } else {
         lightboxVideoFrame.src = '';
-      }
-
-      setTimeout(() => {
-        // Move to next item
-        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxImages.length;
-
-        // Load new content
-        if (lightboxType === 'image') {
-          lightboxImg.src = lightboxImages[currentLightboxIndex].src;
-          lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
-          setTimeout(() => lightboxImg.style.opacity = '1', 50);
-        } else {
+        setTimeout(() => {
           lightboxVideoFrame.src = lightboxImages[currentLightboxIndex].src + '?autoplay=1';
-        }
-
-        // Update counter
-        if (counter) {
-          counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
-        }
-      }, 300);
+        }, 100);
+      }
+      
+      // Update counter
+      if (counter) {
+        counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+      }
     }
 
     function prevLightboxImage() {
       if (lightboxImages.length === 0) return;
-
+      
       const lightboxImg = document.getElementById('lightboxImage');
       const lightboxVideoFrame = document.getElementById('lightboxVideoFrame');
       const counter = document.getElementById('lightboxCounter');
-
-      // Fade out or stop video
+      
+      // Move to previous item
+      currentLightboxIndex = (currentLightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+      
       if (lightboxType === 'image') {
-        lightboxImg.style.opacity = '0';
+        const currentImage = lightboxImages[currentLightboxIndex];
+        
+        // Show thumbnail with blur
+        lightboxImg.src = currentImage.thumbnail;
+        lightboxImg.style.filter = 'blur(10px)';
+        
+        // Load full res
+        const fullResImg = new Image();
+        fullResImg.src = currentImage.src;
+        fullResImg.onload = () => {
+          lightboxImg.style.filter = 'blur(0px)';
+          lightboxImg.src = currentImage.src;
+          lightboxImg.alt = currentImage.alt;
+        };
       } else {
         lightboxVideoFrame.src = '';
-      }
-
-      setTimeout(() => {
-        // Move to previous item
-        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
-
-        // Load new content
-        if (lightboxType === 'image') {
-          lightboxImg.src = lightboxImages[currentLightboxIndex].src;
-          lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
-          setTimeout(() => lightboxImg.style.opacity = '1', 50);
-        } else {
+        setTimeout(() => {
           lightboxVideoFrame.src = lightboxImages[currentLightboxIndex].src + '?autoplay=1';
-        }
-
-        // Update counter
-        if (counter) {
-          counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
-        }
-      }, 300);
+        }, 100);
+      }
+      
+      // Update counter
+      if (counter) {
+        counter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+      }
     }
 
     // Keyboard navigation for lightbox
@@ -1292,7 +1327,7 @@
 
       // Reset index when initializing
       galleryIndex = 0;
-
+      
       function getCardsPerView() {
         return isMobile() ? 1 : 3;
       }
@@ -1312,7 +1347,7 @@
       function next() {
         const maxIndex = getMaxIndex();
         if (maxIndex === 0) return;
-
+        
         galleryIndex = galleryIndex + 1;
         if (galleryIndex > maxIndex) {
           galleryIndex = 0;
@@ -1323,7 +1358,7 @@
       function prev() {
         const maxIndex = getMaxIndex();
         if (maxIndex === 0) return;
-
+        
         galleryIndex = galleryIndex - 1;
         if (galleryIndex < 0) {
           galleryIndex = maxIndex;
@@ -1342,18 +1377,18 @@
       // Attach event listeners
       const prevBtn = document.getElementById('gallery-prev');
       const nextBtn = document.getElementById('gallery-next');
-
+      
       if (prevBtn) {
-        prevBtn.onclick = () => {
-          prev();
-          startAuto();
+        prevBtn.onclick = () => { 
+          prev(); 
+          startAuto(); 
         };
       }
-
+      
       if (nextBtn) {
-        nextBtn.onclick = () => {
-          next();
-          startAuto();
+        nextBtn.onclick = () => { 
+          next(); 
+          startAuto(); 
         };
       }
 
@@ -1371,7 +1406,7 @@
 
       // Reset index when initializing
       videoIndex = 0;
-
+      
       function getCardsPerView() {
         return isMobile() ? 1 : 2;
       }
@@ -1391,7 +1426,7 @@
       function next() {
         const maxIndex = getMaxIndex();
         if (maxIndex === 0) return;
-
+        
         videoIndex = videoIndex + 1;
         if (videoIndex > maxIndex) {
           videoIndex = 0;
@@ -1402,7 +1437,7 @@
       function prev() {
         const maxIndex = getMaxIndex();
         if (maxIndex === 0) return;
-
+        
         videoIndex = videoIndex - 1;
         if (videoIndex < 0) {
           videoIndex = maxIndex;
@@ -1411,15 +1446,15 @@
       }
 
       // NO AUTO-SCROLL for videos
-
+      
       // Attach event listeners
       const prevBtn = document.getElementById('video-prev');
       const nextBtn = document.getElementById('video-next');
-
+      
       if (prevBtn) {
         prevBtn.onclick = prev;
       }
-
+      
       if (nextBtn) {
         nextBtn.onclick = next;
       }
@@ -1435,14 +1470,14 @@
       const fabMenu = document.getElementById('contactFabMenu');
       const fabIcon = document.getElementById('contactFabIcon');
       const fabClose = document.getElementById('contactFabClose');
-
+      
       if (!fabButton || !fabMenu) return;
-
+      
       let isOpen = false;
-
+      
       fabButton.addEventListener('click', () => {
         isOpen = !isOpen;
-
+        
         if (isOpen) {
           fabMenu.classList.add('active');
           fabIcon.classList.add('hidden');
@@ -1453,7 +1488,7 @@
           fabClose.classList.add('hidden');
         }
       });
-
+      
       // Close menu when clicking outside
       document.addEventListener('click', (e) => {
         if (isOpen && !e.target.closest('#contactFab')) {
@@ -1463,7 +1498,7 @@
           isOpen = false;
         }
       });
-
+      
       console.log('✅ Contact FAB initialized');
     }
 
@@ -1511,7 +1546,7 @@
       const lightboxClose = document.getElementById('lightboxClose');
       const lightboxPrev = document.getElementById('lightboxPrev');
       const lightboxNext = document.getElementById('lightboxNext');
-
+      
       if (lightbox) {
         // Click background to close
         lightbox.addEventListener('click', (e) => {
@@ -1520,15 +1555,15 @@
           }
         });
       }
-
+      
       if (lightboxClose) {
         lightboxClose.addEventListener('click', closeLightbox);
       }
-
+      
       if (lightboxPrev) {
         lightboxPrev.addEventListener('click', prevLightboxImage);
       }
-
+      
       if (lightboxNext) {
         lightboxNext.addEventListener('click', nextLightboxImage);
       }
