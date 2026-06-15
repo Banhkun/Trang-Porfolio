@@ -6,6 +6,26 @@
   "videos": {
     "files": [
       {
+        "id": "1lf72pABaIKN0PHkwxd0b3phmDE_FjSXV",
+        "name": "MC REVIEW X DẦU GỘI THẢO DƯỢC BẠCH PHỤC LINH.mp4",
+        "createdTime": "2026-06-13T12:56:00.025Z",
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "50033"
+        }
+      },
+      {
+        "id": "1lO2sruyr1tUuO2_Doj--rwtWXESgGm0q",
+        "name": "MC REVIEW X DẦU GỘI THẢO DƯỢC BẠCH PHỤC LINH.mp4",
+        "createdTime": "2026-06-13T12:52:37.801Z",
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "47766"
+        }
+      },
+      {
         "id": "1CKCyXuTfY8NHge9xub7pzoxA7g0VTTKD",
         "name": "Event - Hội Nghị - DANONE - Kiwi Food.mp4",
         "createdTime": "2026-06-04T16:44:39.798Z",
@@ -387,7 +407,7 @@
       },
       {
         "id": "10V0-wG18Pd_w_iCDBn5qaKiSqkmIXVLU",
-        "name": "YEP × XÓM LỘC NỘI.mp4",
+        "name": "YEP × XÓM LỘC N��I.mp4",
         "createdTime": "2026-05-30T06:35:40.417Z",
         "videoMediaMetadata": {
           "width": 1080,
@@ -566,7 +586,7 @@
         }
       }
     ],
-    "count": 56
+    "count": 58
   },
-  "lastUpdated": "2026-06-09T10:16:53.702Z"
+  "lastUpdated": "2026-06-15T09:25:59.327Z"
 }
