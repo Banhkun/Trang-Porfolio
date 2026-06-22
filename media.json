@@ -6,6 +6,16 @@
   "videos": {
     "files": [
       {
+        "id": "1U_ojGN2F487Mk1mi2nfAFjTEtquzPyPM",
+        "name": "Event - Workshop YAMAHA RIDING STATION 2026 (YECVT) & GIAO LƯU KOL CAMLEI.mp4",
+        "createdTime": "2026-06-20T10:33:55.841Z",
+        "videoMediaMetadata": {
+          "width": 1280,
+          "height": 720,
+          "durationMillis": "108133"
+        }
+      },
+      {
         "id": "1dWDponvbed1guVyvbh4cQV6EgG_FYK0b",
         "name": "Hoạt náo x VPBank.mp4",
         "createdTime": "2026-06-16T07:48:42.476Z",
@@ -177,7 +187,7 @@
       },
       {
         "id": "1EwSv5JdflPkofHAnP1lYZA99Ee_M8NAr",
-        "name": "Event - L��� trao bằng chứng chỉ quốc tế của Đại học Cambridge (Part 1).mp4",
+        "name": "Event - Lễ trao bằng chứng chỉ quốc tế của Đại học Cambridge (Part 1).mp4",
         "createdTime": "2026-06-02T19:00:47.208Z",
         "videoMediaMetadata": {
           "width": 1280,
@@ -616,7 +626,7 @@
         }
       }
     ],
-    "count": 61
+    "count": 62
   },
-  "lastUpdated": "2026-06-17T11:01:42.393Z"
+  "lastUpdated": "2026-06-22T09:12:52.379Z"
 }
