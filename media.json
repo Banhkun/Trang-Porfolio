@@ -6,6 +6,96 @@
   "videos": {
     "files": [
       {
+        "id": "1-OllEJ8M5R4BkitYhCSAXF94RbclsG0w",
+        "name": "Hoạt náo x VPBank x Giải chạy UEH Marathon.mp4",
+        "createdTime": "2026-07-05T05:23:29.435Z",
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "135699"
+        }
+      },
+      {
+        "id": "19c6KWdDiEps0N1swjHIW-ikd6FlRnOMR",
+        "name": "Hoạt náo x VPBank x Giải chạy UEH Marathon.mp4",
+        "createdTime": "2026-07-05T05:05:51.605Z",
+        "videoMediaMetadata": {
+          "width": 1280,
+          "height": 720,
+          "durationMillis": "212433"
+        }
+      },
+      {
+        "id": "1sQMH8fOuiFxNM1GLTsdeaZ_NDonzpxLg",
+        "name": "Hoạt náo x VPBank x Giải chạy UEH Marathon.mp4",
+        "createdTime": "2026-07-05T04:59:19.700Z",
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "51633"
+        }
+      },
+      {
+        "id": "1EaRzCbUU0SNlriCm5gw1Ctv5dFpNvttw",
+        "name": "Launching event x Honor x9c.mp4",
+        "createdTime": "2026-07-05T01:29:07.581Z",
+        "videoMediaMetadata": {
+          "width": 720,
+          "height": 1280,
+          "durationMillis": "103900"
+        }
+      },
+      {
+        "id": "1n669HXZ_Ww4nvDzY6NSBADEOEF8JVmDw",
+        "name": "Song ngữ x Trung thu - Kira Art & Coffee.mp4",
+        "createdTime": "2026-07-05T01:17:45.530Z",
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "79200"
+        }
+      },
+      {
+        "id": "1QCQjdtE1V7nWff9eSogeI0Wdx8pFzIux",
+        "name": "Song ngữ x Khai trương Kira Art & Coffee.mp4",
+        "createdTime": "2026-07-05T01:10:29.060Z",
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "153900"
+        }
+      },
+      {
+        "id": "1ZP0oQi74oOKD0HyWsxodOJ1kN-6P5qMx",
+        "name": "Song ngữ x Khai trương Phở Việt Nam.mp4",
+        "createdTime": "2026-07-05T00:51:14.086Z",
+        "videoMediaMetadata": {
+          "width": 1920,
+          "height": 1080,
+          "durationMillis": "65166"
+        }
+      },
+      {
+        "id": "1zrcQ2KCswlr36GKa_TKESOdzdn758StC",
+        "name": "Hoạt náo x Khai trương & chốt sale Kingfood Mart.mp4",
+        "createdTime": "2026-07-04T16:57:16.628Z",
+        "videoMediaMetadata": {
+          "width": 1080,
+          "height": 1920,
+          "durationMillis": "472966"
+        }
+      },
+      {
+        "id": "1AOx1k5fMtv4j1aGtX1Uvj8qE8lruJtKM",
+        "name": "Song ngữ × Al Presco's - 30 năm đồng hành hạnh phúc.mp4",
+        "createdTime": "2026-07-04T16:25:21.277Z",
+        "videoMediaMetadata": {
+          "width": 1920,
+          "height": 1080,
+          "durationMillis": "929100"
+        }
+      },
+      {
         "id": "13LdEtvu3FKUdY6J-lirXH5YOkIVTCmnN",
         "name": "Event × Al Presco's - 30 năm đồng hành hạnh phúc.mp4",
         "createdTime": "2026-06-27T03:24:26.916Z",
@@ -23,36 +113,6 @@
           "width": 1280,
           "height": 720,
           "durationMillis": "108133"
-        }
-      },
-      {
-        "id": "1dWDponvbed1guVyvbh4cQV6EgG_FYK0b",
-        "name": "Hoạt náo x VPBank.mp4",
-        "createdTime": "2026-06-16T07:48:42.476Z",
-        "videoMediaMetadata": {
-          "width": 720,
-          "height": 1280,
-          "durationMillis": "137733"
-        }
-      },
-      {
-        "id": "1XeAGrf0EDmMePlzarWAY-zLgsskpCtni",
-        "name": "Hoạt náo x VPBank x Giải chạy Marathon.mp4",
-        "createdTime": "2026-06-16T07:41:19.499Z",
-        "videoMediaMetadata": {
-          "width": 1920,
-          "height": 1080,
-          "durationMillis": "217266"
-        }
-      },
-      {
-        "id": "1iq7_kvFb0BnbA714HTqFOQZHPF3-03Kg",
-        "name": "Hoạt náo x VPBank × Giải chạy Marathon.mp4",
-        "createdTime": "2026-06-16T07:32:06.439Z",
-        "videoMediaMetadata": {
-          "width": 1080,
-          "height": 1920,
-          "durationMillis": "88200"
         }
       },
       {
@@ -277,7 +337,7 @@
       },
       {
         "id": "1ud5vouh7FKS-OlOiyOdhLX9W337AsaEq",
-        "name": "Activation x Locknlock.mp4",
+        "name": "Minigame x Locknlock.mp4",
         "createdTime": "2026-06-01T09:48:08.240Z",
         "videoMediaMetadata": {
           "width": 1920,
@@ -507,7 +567,7 @@
       },
       {
         "id": "1MIsb9CHr0yvp2KQ2eEOfxm3MuyIvHMjI",
-        "name": "Activation - Bia Sài Gòn × Chill đậm chất hè.mp4",
+        "name": "Hoạt náo x Bia Sài Gòn × Chill đậm chất hè.mp4",
         "createdTime": "2026-05-30T02:46:19.747Z",
         "videoMediaMetadata": {
           "width": 1920,
@@ -636,7 +696,7 @@
         }
       }
     ],
-    "count": 63
+    "count": 69
   },
-  "lastUpdated": "2026-06-29T08:16:35.451Z"
+  "lastUpdated": "2026-07-06T07:15:46.299Z"
 }
