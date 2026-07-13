@@ -6,6 +6,16 @@
   "videos": {
     "files": [
       {
+        "id": "1fZA29x3kplUwXFcmGm2Z5byGq0zEuL61",
+        "name": "Bilingual MC Thùy Trang (Trang Naria) x Al Fresco's | Part 2.mp4",
+        "createdTime": "2026-07-11T06:41:40.844Z",
+        "videoMediaMetadata": {
+          "width": 1280,
+          "height": 720,
+          "durationMillis": "282600"
+        }
+      },
+      {
         "id": "1-OllEJ8M5R4BkitYhCSAXF94RbclsG0w",
         "name": "Hoạt náo x VPBank x Giải chạy UEH Marathon.mp4",
         "createdTime": "2026-07-05T05:23:29.435Z",
@@ -487,7 +497,7 @@
       },
       {
         "id": "1ByXFKh3CmpFpW5Jh5KluY64d-mYqeGIt",
-        "name": "CHỊ HẰNG × TROPIC GARDEN.mp4",
+        "name": "CHỊ H���NG × TROPIC GARDEN.mp4",
         "createdTime": "2026-05-30T07:15:05.659Z",
         "videoMediaMetadata": {
           "width": 1280,
@@ -696,7 +706,7 @@
         }
       }
     ],
-    "count": 69
+    "count": 70
   },
-  "lastUpdated": "2026-07-06T07:15:46.299Z"
+  "lastUpdated": "2026-07-13T06:22:41.988Z"
 }
