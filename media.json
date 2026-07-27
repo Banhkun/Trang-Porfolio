@@ -87,7 +87,7 @@
       },
       {
         "id": "1n669HXZ_Ww4nvDzY6NSBADEOEF8JVmDw",
-        "name": "Song ngữ x Trung thu - Kira Art & Coffee.mp4",
+        "name": "*Song ngữ x Trung thu - Kira Art & Coffee.mp4",
         "createdTime": "2026-07-05T01:17:45.530Z",
         "videoMediaMetadata": {
           "width": 1080,
@@ -97,7 +97,7 @@
       },
       {
         "id": "1QCQjdtE1V7nWff9eSogeI0Wdx8pFzIux",
-        "name": "Song ngữ x Khai trương Kira Art & Coffee.mp4",
+        "name": "*Song ngữ x Khai trương Kira Art & Coffee.mp4",
         "createdTime": "2026-07-05T01:10:29.060Z",
         "videoMediaMetadata": {
           "width": 1080,
@@ -107,7 +107,7 @@
       },
       {
         "id": "1ZP0oQi74oOKD0HyWsxodOJ1kN-6P5qMx",
-        "name": "Song ngữ x Khai trương Phở Việt Nam.mp4",
+        "name": "*Song ngữ x Khai trương Phở Việt Nam.mp4",
         "createdTime": "2026-07-05T00:51:14.086Z",
         "videoMediaMetadata": {
           "width": 1920,
@@ -127,7 +127,7 @@
       },
       {
         "id": "1AOx1k5fMtv4j1aGtX1Uvj8qE8lruJtKM",
-        "name": "Song ngữ × Al Presco's - 30 năm đồng hành hạnh phúc.mp4",
+        "name": "*Song ngữ × Al Presco's - 30 năm đồng hành hạnh phúc.mp4",
         "createdTime": "2026-07-04T16:25:21.277Z",
         "videoMediaMetadata": {
           "width": 1920,
@@ -647,7 +647,7 @@
       },
       {
         "id": "1ZtLheMkRvbBWw3QdGv7b4sdFGZSiTtW9",
-        "name": "VJ × VPBank.mp4",
+        "name": "#VJ × VPBank.mp4",
         "createdTime": "2026-05-30T02:00:14.756Z",
         "videoMediaMetadata": {
           "width": 720,
@@ -687,7 +687,7 @@
       },
       {
         "id": "1KJtpR5N7ebg95O_Dqk_gMo3-b-1IV9RV",
-        "name": "Wedding - Huy���n Trang & Văn Thắng",
+        "name": "Wedding - Huyền Trang & Văn Thắng",
         "createdTime": "2025-11-26T17:12:02.657Z",
         "videoMediaMetadata": {
           "width": 720,
@@ -717,7 +717,7 @@
       },
       {
         "id": "1QRNyzLQ9TyR-Usd9DP3Efg4d5XlBF-p5",
-        "name": "VJ × Hacom Gò Vấp",
+        "name": "#VJ × Hacom Gò Vấp",
         "createdTime": "2025-11-26T16:55:53.157Z",
         "videoMediaMetadata": {
           "width": 1080,
@@ -738,5 +738,5 @@
     ],
     "count": 73
   },
-  "lastUpdated": "2026-07-20T06:20:03.622Z"
+  "lastUpdated": "2026-07-27T06:33:16.158Z"
 }
