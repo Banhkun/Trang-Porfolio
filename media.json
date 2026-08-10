@@ -6,6 +6,26 @@
   "videos": {
     "files": [
       {
+        "id": "194ejCM3Bb1YoWj2GXYrqbww6U-IVbIaM",
+        "name": "Event-YamahaRidingStation2026-ThisomallTruongChinh.mp4",
+        "createdTime": "2026-08-08T04:12:06.735Z",
+        "videoMediaMetadata": {
+          "width": 1920,
+          "height": 1080,
+          "durationMillis": "145400"
+        }
+      },
+      {
+        "id": "1paDPIko6KYu9ZdC9pieJAaqacQG8LYjp",
+        "name": "*Event × Khai trương Không gian Gốm Bát Tràng - Chi nhánh Nha Trang.mp4",
+        "createdTime": "2026-08-06T10:39:28.504Z",
+        "videoMediaMetadata": {
+          "width": 1920,
+          "height": 1080,
+          "durationMillis": "188766"
+        }
+      },
+      {
         "id": "1dV-eS61lCWdVq96w3NCTEwMBnHFHxIfy",
         "name": "Hoạt náo Mầm non Hoa Mai x MyKingDom.mp4",
         "createdTime": "2026-07-15T05:44:19.638Z",
@@ -727,7 +747,7 @@
       },
       {
         "id": "1a_pq28R6Bab8HLHhPC4w8qxgBwoi7sqo",
-        "name": "Event × Danone - Kiwi Food - Hội nghị.mp4",
+        "name": "Event - Hội nghị Khách hàng Danone - Kiwi Food - Hội nghị.mp4",
         "createdTime": "2025-11-24T12:43:29.899Z",
         "videoMediaMetadata": {
           "width": 3840,
@@ -736,7 +756,7 @@
         }
       }
     ],
-    "count": 73
+    "count": 75
   },
-  "lastUpdated": "2026-08-03T06:26:40.835Z"
+  "lastUpdated": "2026-08-10T04:39:50.836Z"
 }
